@@ -1,46 +1,48 @@
 body{
-    background-image: url(../images/배경화면\ 2.jpg);
+    background-image: url(../images/background-image.jpg);
     background-repeat: no-repeat;
-    background-size: 420px;
+    background-size: 405px;
+    background-position-x: center;
 }
 button{
     border: none;
-    width: 80px;
-    height: 78px;
+    width:100px;
+    height: 100px;
     cursor: pointer;
     position: fixed;
     font-family: 'NanumBarunGothicYetHangul';
     border-radius: 30%;
 }
 #cart-button{
-    background-color: #fef28c;
-     border: none;
-    width: 40px;
-    height: 40px;
-    top: 170px;
-    left: 270px;
+    cursor: pointer;
+    background-color: #fedc00;
+    border: none;
+   width: 40px;
+   height: 40px;
+   position: fixed;
+   left: 320px;
 }
 #americano{
-    top: 240px;
-    left: 80px;
+    top: 100px;
+    left: 70px;
 }
 #caramel{
-    top: 240px;
+    top: 100px;
     left:220px;
 }
 #mint{
-    top: 370px;
-    left:80px;
+    top: 280px;
+    left:70px;
 }
 #grape{
-    top: 370px;
+    top: 280px;
     left:220px;
 }
 #mocha{
-    top: 510px;
-    left: 80px;
+    top: 460px;
+    left: 70px;
 }
 #remon{
-    top: 510px;
+    top: 460px;
     left: 220px;
 }

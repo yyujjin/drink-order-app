@@ -1,15 +1,15 @@
 body{
-    background-image: url(../images/장바구니\ 배경화면.jpg);
+    background-image: url(../images/background-image.jpg);
     background-repeat: no-repeat;
-    background-size: 400px;
+    background-size: 405px;
+    background-position-x: center;
 }
 #list-button{
     cursor: pointer;
-    background-color: #fef28c;
+    background-color: #fedc00;
     border: none;
-   width: 50px;
-   height: 50px;
+   width: 40px;
+   height: 40px;
    position: fixed;
-   top: 150px;
-   left: 270px;
+   left: 320px;
 }
