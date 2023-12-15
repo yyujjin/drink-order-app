@@ -1,0 +1,46 @@
+body{
+    background-image: url(../images/배경화면\ 2.jpg);
+    background-repeat: no-repeat;
+    background-size: 420px;
+}
+button{
+    border: none;
+    width: 80px;
+    height: 78px;
+    cursor: pointer;
+    position: fixed;
+    font-family: 'NanumBarunGothicYetHangul';
+    border-radius: 30%;
+}
+#cart-button{
+    background-color: #fef28c;
+     border: none;
+    width: 40px;
+    height: 40px;
+    top: 170px;
+    left: 270px;
+}
+#americano{
+    top: 240px;
+    left: 80px;
+}
+#caramel{
+    top: 240px;
+    left:220px;
+}
+#mint{
+    top: 370px;
+    left:80px;
+}
+#grape{
+    top: 370px;
+    left:220px;
+}
+#mocha{
+    top: 510px;
+    left: 80px;
+}
+#remon{
+    top: 510px;
+    left: 220px;
+}
