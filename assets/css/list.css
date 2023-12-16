@@ -15,7 +15,7 @@ button{
 }
 #cart-button{
     cursor: pointer;
-    background-color: #fedc00;
+    background-color: hsl(52, 100%, 50%);
     border: none;
    width: 40px;
    height: 40px;

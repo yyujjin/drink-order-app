@@ -3,7 +3,9 @@ body{
     background-repeat: no-repeat;
     background-size: 405px;
     background-position-x: center;
+    font-family: 'NanumBarunGothicYetHangul';
 }
+
 #list-button{
     cursor: pointer;
     background-color: #fedc00;
@@ -11,5 +13,53 @@ body{
    width: 40px;
    height: 40px;
    position: fixed;
-   left: 320px;
+   top: 10px;
+   left: 312px;
+}
+
+#total-pay{
+    font-family: 'NanumBarunGothicYetHangul';
+    position: fixed;
+    top:635px ;
+    left: 110px;
+}
+
+.list{
+    border: solid rgb(169, 165, 165) 1px; 
+    height: 110px;
+    padding-top: 9px;
+    padding-left: 20px;
+    margin-top: 10px;
+    margin-left: -10px;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    width: 350px;
+}
+
+#first-list{
+    margin-top: 60px;
+}
+
+.drink-image{
+    float: left;
+    margin-right: 40px;
+    margin-left: -5px;
+}
+
+.delete-buttons{
+    background-color: rgb(255, 255, 255);
+    border: outset black 1px;
+    float: right;
+    margin: 10px;
+    margin-right: 18px;
+}
+
+#add-item-button{
+    font-family: 'NanumBarunGothicYetHangul';
+    background-color: rgb(255, 255, 255);
+    border: none;
+   margin-top: 10px;
+   width: 360px;
+   height: 50px;
 }
