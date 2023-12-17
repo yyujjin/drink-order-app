@@ -11,12 +11,12 @@ async function getCartItems() {
 
 function makeDrinkList(items) {
     const orderList = document.querySelector("#order-list")
-orderList.innerHTML = ""
+    orderList.innerHTML = ""
     for (let i = 0; i < items.length; i++) {
         orderList.innerHTML += 
         `<div class="lists"  id="${firstList(i)}">
             <div class="drink-image" >
-                <img  src="../assets/images/no-image.jpg" width="100" height="100" alt="">
+                <img src="${items[i].Src}" width="60" height="100" alt="">
             </div>
             <ul>
                 <li>품명 : ${items[i].Name}</li>  
@@ -26,7 +26,7 @@ orderList.innerHTML = ""
             </ul>
         </div>`
     }
-    const deleteButtons = document.querySelectorAll(".deleteButtons")
+    const deleteButtons = document.querySelectorAll(".delete-buttons")
     for (let i = 0; i < deleteButtons.length; i++) {
         deleteButtons[i].addEventListener("click", function () {
             deleteList(i)
@@ -50,7 +50,7 @@ async function deleteList (i) {
         return
     }
     try {
-        await fetch(`http://localhost:8080/delete/${i}`, {
+        await fetch(`http://localhost:8080/deleteItem/${i}`, {
             method: "DELETE",
         })
         getCartItems()
