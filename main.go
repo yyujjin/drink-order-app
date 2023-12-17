@@ -20,12 +20,12 @@ func main() {
 	}
 
 	var drinkItems = []drinkItem{
-		{"아메리카노", 4500, "../assets/images/Americano.png", 0},
-		{"카라멜 마끼아또", 6500, "../assets/images/CaramelMacchiato.png", 0},
-		{"민트초코 프라페", 6500, "../assets/images/MintChocolate Frappe.png", 0},
-		{"자몽 스무디", 5000, "../assets/images/Grapefruit Smoothie.png", 0},
-		{"카페 모카", 6000, "../assets/images/CafeMocha.png", 0},
-		{"레몬 에이드", 5000, "../assets/images/LemonAde.png", 0},
+		{"아메리카노", 4500, "../assets/images/Americano.png", 1},
+		{"카라멜 마끼아또", 6500, "../assets/images/CaramelMacchiato.png", 1},
+		{"민트초코 프라페", 6500, "../assets/images/MintChocolate Frappe.png", 1},
+		{"자몽 스무디", 5000, "../assets/images/Grapefruit Smoothie.png", 1},
+		{"카페 모카", 6000, "../assets/images/CafeMocha.png", 1},
+		{"레몬 에이드", 5000, "../assets/images/LemonAde.png", 1},
 	}
 	var cartItems = []drinkItem{}
 
