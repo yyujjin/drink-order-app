@@ -42,6 +42,7 @@ func main() {
 		for i := 0; i < len(cartItems); i++ {
 			if drinkItems[id].Name == cartItems[i].Name {
 				cartItems[i].Count += 1
+				cartItems[i].Price += drinkItems[id].Price
 				fmt.Println(cartItems)
 				return
 			}

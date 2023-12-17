@@ -11,7 +11,6 @@ async function getCartItems() {
     makeDrinkList(items)
 }
 
-
 function makeDrinkList(items) {
     const orderList = document.querySelector("#order-list")
     orderList.innerHTML = ""
@@ -37,16 +36,12 @@ function makeDrinkList(items) {
     }
 }
 
-
-
 function firstList(i) {
-if (i==0) {
-    return "first-list"
-}
+    if (i==0) {
+        return "first-list"
+    }
 }
 
-
-//삭제 함수 
 async function deleteList (i) {
     const confirmDelete = confirm("삭제하시겠습니까?")
     if (!confirmDelete) {
