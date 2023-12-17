@@ -11,7 +11,7 @@ async function getCartItems() {
 
 function makeDrinkList(items) {
     const orderList = document.querySelector("#order-list")
-// orderList.innerHTML = ""
+orderList.innerHTML = ""
     for (let i = 0; i < items.length; i++) {
         orderList.innerHTML += 
         `<div class="lists"  id="${firstList(i)}">
