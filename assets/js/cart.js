@@ -56,4 +56,12 @@ async function deleteList (i) {
         console.error("네트워크 오류:", error)
     }
 }
- 
+
+getTotalPrice()
+async function getTotalPrice() {
+    const res = await fetch("http://localhost:8080/getTotalPrice")
+    const price = await res.json()
+    console.log(price)
+    const totalPrice = document.querySelector("span")
+totalPrice.innerHTML = `${price}`
+}
