@@ -1,4 +1,7 @@
-
+const goToListButton = document.querySelector("#list-button")
+goToListButton.addEventListener("click",function(){
+    location.href="http://localhost:8080/list"
+})
 
 getCartItems()
 async function getCartItems() {

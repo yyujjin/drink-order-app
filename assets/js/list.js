@@ -1,17 +1,14 @@
-const drinks = document.querySelectorAll(".drinks")
-console.log(drinks)
-for (let i=0; i<drinks.length; i++) {
-    drinks[i].addEventListener("click",function(){
-        putItemToCart(i)
-    })
-}
-
-
 const cartButton = document.querySelector("#cart-button")
 cartButton.addEventListener("click", function () {
     location.href = "http://localhost:8080/cart"
 })
 
+const drinks = document.querySelectorAll(".drinks")
+for (let i=0; i<drinks.length; i++) {
+    drinks[i].addEventListener("click",function(){
+        putItemToCart(i)
+    })
+}
 
 
 async function putItemToCart(i) {
