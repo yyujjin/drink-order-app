@@ -26,9 +26,7 @@ func main() {
 		{"레몬 에이드", 5000},
 	}
 
-	var a = []drinkItem{}
-	//a = append(a, drinkItems[2])
-	//fmt.Println(a)
+	var cartItems = []drinkItem{}
 
 	r.GET("/list", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "list.html", gin.H{})
@@ -37,12 +35,18 @@ func main() {
 	r.GET("/cart", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "cart.html", gin.H{})
 	})
-	r.POST("/temp/:id", func(c *gin.Context) {
+
+	r.POST("/addToCart/:id", func(c *gin.Context) {
 		id, _ := strconv.Atoi(c.Param("id"))
 		fmt.Println(id)
-		a = append(a, drinkItems[id])
-		fmt.Println(a)
+		cartItems = append(cartItems, drinkItems[id])
+		fmt.Println(cartItems)
 	})
+
+r.GET("/getCartItems", func(c *gin.Context) {
+	c.JSON(200, cartItems)
+	})
+
 
 	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
