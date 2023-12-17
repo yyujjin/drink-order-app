@@ -70,5 +70,14 @@ func main() {
 		c.IndentedJSON(http.StatusNotFound, gin.H{"message": "album not found"})
 	})
 
+	r.GET("/getTotalPrice", func(c *gin.Context) {
+		var totalPrice int
+		for index := range cartItems {
+		totalPrice += cartItems[index].Price
+		}
+		fmt.Println(totalPrice)
+		c.JSON(200, totalPrice)
+	})
+
 	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
