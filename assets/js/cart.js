@@ -52,6 +52,7 @@ async function deleteList (i) {
             method: "DELETE",
         })
         getCartItems()
+        getTotalPrice()
     } catch (error) {
         console.error("네트워크 오류:", error)
     }
