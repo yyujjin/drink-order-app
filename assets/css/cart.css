@@ -65,3 +65,13 @@ body{
     width: 350px;
     height: 53px;
 }
+
+.count{
+    font-family: 'NanumBarunGothicYetHangul';
+    height: 25px;
+    width: 27px;
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: rgb(255, 255, 255);
+    font-size: 20px;
+}

@@ -23,7 +23,8 @@ function makeDrinkList(items) {
             <ul>
                 <li>품명 : ${items[i].Name}</li>  
                 <li>가격 : ${items[i].Price} 원</li>    
-                <li>수량 : ${items[i].Count} 개</li>      
+                <li>수량 : <button id="minus" class="count" >-</button>${items[i].Count}개
+                <button id="plus" class="count">+</button></li>      
                 <button class="delete-buttons">x</button>
             </ul>
         </div>`
