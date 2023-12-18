@@ -32,13 +32,16 @@ function makeDrinkList(items) {
     }
     const deleteButtons = document.querySelectorAll(".delete-buttons")
     const plusCounts = document.querySelectorAll(".plusCounts")
-    console.log(plusCounts)
+    const minusCounts = document.querySelectorAll(".minusCounts")
     for (let i = 0; i < deleteButtons.length; i++) {
         deleteButtons[i].addEventListener("click", function () {
             deleteList(i)
         })
         plusCounts[i].addEventListener("click", function () {
             plusCount(i)
+        })
+        minusCounts[i].addEventListener("click",function(){
+            minusCount(i)
         })
     }
     getTotalPrice()
@@ -78,6 +81,17 @@ async function getTotalPrice() {
 async function plusCount(i) {
     try {
         await fetch(`http://localhost:8080/plusCount/${i}`, {
+            method: "PUT",
+        })
+        getCartItems()
+    } catch (error) {
+        console.error("네트워크 오류:", error)
+    }
+}
+
+async function minusCount(i) {
+    try {
+        await fetch(`http://localhost:8080/minusCount/${i}`, {
             method: "PUT",
         })
         getCartItems()

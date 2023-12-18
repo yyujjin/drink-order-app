@@ -82,11 +82,25 @@ func main() {
 
 	r.PUT("/plusCount/:id", func(c *gin.Context) {
 		id, _ := strconv.Atoi(c.Param("id"))
-			for i := 0; i < len(cartItems); i++ {
-				cartItems[id].Count += 1
-				cartItems[id].Price += drinkItems[i].Price
-				c.Redirect(http.StatusFound, "/getTotalPrice")
-				return
+		cartItems[id].Count += 1
+					for index,value := range drinkItems { //index 마구잡이임
+						if cartItems[id].Name == drinkItems[index].Name {
+							cartItems[id].Price += value.Price
+							c.Redirect(http.StatusFound, "/getTotalPrice")
+							return
+					}
+		}
+	})
+
+	r.PUT("/minusCount/:id", func(c *gin.Context) {
+		id, _ := strconv.Atoi(c.Param("id"))
+		cartItems[id].Count -= 1
+					for index,value := range drinkItems { //index 마구잡이임
+						if cartItems[id].Name == drinkItems[index].Name {
+							cartItems[id].Price -= value.Price
+							c.Redirect(http.StatusFound, "/getTotalPrice")
+							return
+					}
 		}
 	})
 
