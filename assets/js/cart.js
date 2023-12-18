@@ -1,6 +1,6 @@
 const goToListButton = document.querySelector("#list-button")
-goToListButton.addEventListener("click",function(){
-    location.href="http://localhost:8080/list"
+goToListButton.addEventListener("click", function () {
+    location.href = "http://localhost:8080/list"
 })
 
 getCartItems()
@@ -15,35 +15,42 @@ function makeDrinkList(items) {
     const orderList = document.querySelector("#order-list")
     orderList.innerHTML = ""
     for (let i = 0; i < items.length; i++) {
-        orderList.innerHTML += 
-        `<div class="lists"  id="${firstList(i)}">
+        orderList.innerHTML += `<div class="lists"  id="${adjustSpacing(i)}">
             <div class="drink-image" >
                 <img src="${items[i].Src}" width="60" height="100" alt="">
             </div>
             <ul>
                 <li>품명 : ${items[i].Name}</li>  
                 <li>가격 : ${items[i].Price} 원</li>    
-                <li>수량 : <button id="minus" class="count" >-</button>${items[i].Count}개
-                <button id="plus" class="count">+</button></li>      
+                <li>수량 : <button class="minusCounts" >-</button>${
+                    items[i].Count
+                }개
+                <button class="plusCounts" >+</button></li>      
                 <button class="delete-buttons">x</button>
             </ul>
         </div>`
     }
     const deleteButtons = document.querySelectorAll(".delete-buttons")
+    const plusCounts = document.querySelectorAll(".plusCounts")
+    console.log(plusCounts)
     for (let i = 0; i < deleteButtons.length; i++) {
         deleteButtons[i].addEventListener("click", function () {
             deleteList(i)
         })
+        plusCounts[i].addEventListener("click", function () {
+            plusCount(i)
+        })
     }
+    getTotalPrice()
 }
 
-function firstList(i) {
-    if (i==0) {
+function adjustSpacing(i) {
+    if (i == 0) {
         return "first-list"
     }
 }
 
-async function deleteList (i) {
+async function deleteList(i) {
     const confirmDelete = confirm("삭제하시겠습니까?")
     if (!confirmDelete) {
         return
@@ -65,5 +72,16 @@ async function getTotalPrice() {
     const price = await res.json()
     console.log(price)
     const totalPrice = document.querySelector("span")
-totalPrice.innerHTML = `${price}`
+    totalPrice.innerHTML = `${price}`
+}
+
+async function plusCount(i) {
+    try {
+        await fetch(`http://localhost:8080/plusCount/${i}`, {
+            method: "PUT",
+        })
+        getCartItems()
+    } catch (error) {
+        console.error("네트워크 오류:", error)
+    }
 }
