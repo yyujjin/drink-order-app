@@ -83,7 +83,7 @@ func main() {
 	r.PUT("/plusCount/:id", func(c *gin.Context) {
 		id, _ := strconv.Atoi(c.Param("id"))
 		cartItems[id].Count += 1
-					for index,value := range drinkItems { //index 마구잡이임
+					for index,value := range drinkItems { 
 						if cartItems[id].Name == drinkItems[index].Name {
 							cartItems[id].Price += value.Price
 							c.Redirect(http.StatusFound, "/getTotalPrice")
@@ -94,8 +94,11 @@ func main() {
 
 	r.PUT("/minusCount/:id", func(c *gin.Context) {
 		id, _ := strconv.Atoi(c.Param("id"))
+		if cartItems[id].Count ==1 {
+			return
+		}
 		cartItems[id].Count -= 1
-					for index,value := range drinkItems { //index 마구잡이임
+					for index,value := range drinkItems { 
 						if cartItems[id].Name == drinkItems[index].Name {
 							cartItems[id].Price -= value.Price
 							c.Redirect(http.StatusFound, "/getTotalPrice")
