@@ -1,41 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../assets/css/cart.css">
-    <link href="https://hangeul.pstatic.net/hangeul_static/css/NanumBarunGothicYetHangul.css" rel="stylesheet">
-    <script src="../assets/js/cart.js" defer></script>
-</head>
-<body>
-    <button id="list-button"><img src="../assets/images/list-icon.png" width="25" height="30" alt=""></button>
-    <div id="order-list">
-        <div id="first-list" class="lists">
-            <div class="drink-image" >
-                <img  src="../assets/images/no-image.jpg" width="100" height="100" alt="">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="../assets/css/cart.css" />
+        <link
+            href="https://hangeul.pstatic.net/hangeul_static/css/NanumBarunGothicYetHangul.css"
+            rel="stylesheet"
+        />
+        <script src="../assets/js/cart.js" defer></script>
+    </head>
+    <body>
+        <button id="list-button">
+            <img
+                src="../assets/images/list-icon.png"
+                width="25"
+                height="30"
+                alt=""
+            />
+        </button>
+        <div id="order-list">
+            <div id="first-list" class="lists">
+                <div class="drink-image">
+                    <img
+                        src="../assets/images/no-image.jpg"
+                        width="100"
+                        height="100"
+                        alt=""
+                    />
+                </div>
+                <ul>
+                    <li>품명 : 아메리카노</li>
+                    <li>가격 : 4500 원</li>
+                    <li>
+                        수량 :
+                        <button class="count" class="minus-count">-</button>1개
+                        <button class="count" class="plus-count">+</button>
+                    </li>
+                    <button class="delete-buttons">x</button>
+                </ul>
             </div>
-            <ul>
-                <li>품명 : 아메리카노</li>
-                <li>가격 : 4500 원</li>
-                <li>수량 : <button class="count" class="minus-count" >-</button>1개 <button  class="count" class="plus-count">+</button></li>
-                <button class="delete-buttons" >x</button>
-            </ul>
-        </div>
-        <div class="lists">
-            <div class="drink-image" >
-                <img  src="../assets/images/no-image.jpg" width="100" height="100" alt="">
+            <div class="lists">
+                <div class="drink-image">
+                    <img
+                        src="../assets/images/no-image.jpg"
+                        width="100"
+                        height="100"
+                        alt=""
+                    />
+                </div>
+                <ul>
+                    <li>품명 : 아메리카노</li>
+                    <li>가격 : 4500 원</li>
+                    <li>수량 : 1 개</li>
+                    <button class="delete-buttons">x</button>
+                </ul>
             </div>
-            <ul>
-                <li>품명 : 아메리카노</li>
-                <li>가격 : 4500 원</li>
-                <li>수량 : 1 개</li>
-                <button class="delete-buttons">x</button>
-            </ul>
         </div>
-    </div>
-    <div id="space"></div>
-    <div id="total-pay" >총 주문금액 : <span>17000</span> 원 </div>
-
-</body>
+        <div id="space"></div>
+        <div id="total-pay">총 주문금액 : <span>17000</span> 원</div>
+    </body>
 </html>

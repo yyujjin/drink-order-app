@@ -1,22 +1,22 @@
-body{
+body {
     background-image: url(../images/cart-background-image.jpg);
     background-repeat: no-repeat;
     background-size: 405px;
     background-position-x: center;
-    font-family: 'NanumBarunGothicYetHangul';
+    font-family: "NanumBarunGothicYetHangul";
 }
 
-#list-button{
+#list-button {
     cursor: pointer;
     background-color: rgb(255, 221, 0);
     border: none;
-   width: 40px;
-   height: 40px;
-   margin-left: 310px;
+    width: 40px;
+    height: 40px;
+    margin-left: 310px;
 }
 
-.lists{
-    border: solid rgb(216, 208, 208) 1px; 
+.lists {
+    border: solid rgb(216, 208, 208) 1px;
     height: 110px;
     padding-top: 9px;
     padding-left: 20px;
@@ -28,46 +28,46 @@ body{
     width: 350px;
 }
 
-#first-list{
+#first-list {
     margin-top: 30px;
 }
 
-.drink-image{
+.drink-image {
     float: left;
     margin-right: 40px;
     margin-left: -5px;
 }
 
-.delete-buttons{
+.delete-buttons {
     background-color: rgb(255, 255, 255);
     border: outset rgb(154, 150, 150) 1px;
     float: right;
     margin: 10px;
     margin-right: 18px;
 }
-#total-pay{
-    font-family: 'NanumBarunGothicYetHangul';
+#total-pay {
+    font-family: "NanumBarunGothicYetHangul";
     position: fixed;
     top: 605px;
     /* margin-top: 50px; */
-    margin-left:-8px;
+    margin-left: -8px;
     padding-top: 20px;
     padding-left: 120px;
     width: 255px;
     height: 45px;
     border: 1px solid black;
-    background-color: rgb(255, 221, 0) ;
+    background-color: rgb(255, 221, 0);
     border: none;
 }
-#space{
+#space {
     border: 1px solid black;
     border: none;
     width: 350px;
     height: 53px;
 }
 
-.countButtons{
-    font-family: 'NanumBarunGothicYetHangul';
+.countButtons {
+    font-family: "NanumBarunGothicYetHangul";
     height: 25px;
     width: 27px;
     margin-left: 5px;

@@ -72,27 +72,23 @@ func main() {
 
 	r.GET("/getTotalPrice", func(c *gin.Context) {
 		var totalPrice int
-		for index := range cartItems {
+		for index := range cartItems {  
+
 		totalPrice += cartItems[index].Price
 		}
 		fmt.Println(totalPrice)
 		c.JSON(200, totalPrice)
 	})
 
-	//중복돼서 이것도 코드 함수로 빼서 해야함?
-
 	r.PUT("/plusCount/:id", func(c *gin.Context) {
 		id, _ := strconv.Atoi(c.Param("id"))
 			for i := 0; i < len(cartItems); i++ {
-			if drinkItems[id].Name == cartItems[i].Name {
-				cartItems[i].Count += 1
-				cartItems[i].Price += drinkItems[id].Price
+				cartItems[id].Count += 1
+				cartItems[id].Price += drinkItems[i].Price
 				c.Redirect(http.StatusFound, "/getTotalPrice")
 				return
-			}
 		}
 	})
-
 
 	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
