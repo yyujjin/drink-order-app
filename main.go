@@ -83,12 +83,12 @@ func main() {
 	r.PUT("/plusCount/:id", func(c *gin.Context) {
 		id, _ := strconv.Atoi(c.Param("id"))
 		cartItems[id].Count += 1
-					for index,value := range drinkItems { 
-						if cartItems[id].Name == drinkItems[index].Name {
-							cartItems[id].Price += value.Price
-							c.Redirect(http.StatusFound, "/getTotalPrice")
-							return
-					}
+		for index,value := range drinkItems { 
+			if cartItems[id].Name == drinkItems[index].Name {
+				cartItems[id].Price += value.Price
+				c.Redirect(http.StatusFound, "/getTotalPrice")
+				return
+			}
 		}
 	})
 
@@ -98,14 +98,19 @@ func main() {
 			return
 		}
 		cartItems[id].Count -= 1
-					for index,value := range drinkItems { 
-						if cartItems[id].Name == drinkItems[index].Name {
-							cartItems[id].Price -= value.Price
-							c.Redirect(http.StatusFound, "/getTotalPrice")
-							return
-					}
+		for index,value := range drinkItems { 
+			if cartItems[id].Name == drinkItems[index].Name {
+				cartItems[id].Price -= value.Price
+				c.Redirect(http.StatusFound, "/getTotalPrice")
+				return
+			}
 		}
 	})
 
 	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+
+	// 리스트에서 음료를 추가 1 -> 장바구니에 담기 위해 서버에 추가 
+	// 사용자가 장바구니에서 수량을 변경 5 -> 서버 X . 클라 내부적으로 수량 변경
+	// 주문하기 버튼을 누르면 최종 수량을 서버로 전달
+
 }

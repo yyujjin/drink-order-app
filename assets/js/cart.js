@@ -3,15 +3,16 @@ goToListButton.addEventListener("click", function () {
     location.href = "http://localhost:8080/list"
 })
 
+let items
 getCartItems()
 async function getCartItems() {
     const res = await fetch("http://localhost:8080/getCartItems")
-    const items = await res.json()
+    items = await res.json()
     console.log(items)
-    makeDrinkList(items)
+    makeDrinkList()
 }
 
-function makeDrinkList(items) {
+function makeDrinkList() {
     const orderList = document.querySelector("#order-list")
     orderList.innerHTML = ""
     for (let i = 0; i < items.length; i++) {
@@ -40,7 +41,7 @@ function makeDrinkList(items) {
         plusCounts[i].addEventListener("click", function () {
             plusCount(i)
         })
-        minusCounts[i].addEventListener("click",function(){
+        minusCounts[i].addEventListener("click", function () {
             minusCount(i)
         })
     }
@@ -70,23 +71,21 @@ async function deleteList(i) {
 }
 
 getTotalPrice()
-async function getTotalPrice() {
-    const res = await fetch("http://localhost:8080/getTotalPrice")
-    const price = await res.json()
-    console.log(price)
-    const totalPrice = document.querySelector("span")
-    totalPrice.innerHTML = `${price}`
+function getTotalPrice() {
+    // items에 있는 객체의 count와 prcie를 계산
+    // 각 객체의 count * price 한 값을 모두 더하기!
+    // 숙제!!
+  
+    // 실행하면 에러나니깐 일단 주석 처리
+    // const totalPrice = document.querySelector("span")
+    // totalPrice.innerHTML = `${price}`
 }
 
-async function plusCount(i) {
-    try {
-        await fetch(`http://localhost:8080/plusCount/${i}`, {
-            method: "PUT",
-        })
-        getCartItems()
-    } catch (error) {
-        console.error("네트워크 오류:", error)
-    }
+function plusCount(selectedIndex) {
+    // 기존 count에서 +1 한 값을 다시 저장하기
+    items[selectedIndex].Count += 1 
+    console.log(items[selectedIndex])
+    makeDrinkList()
 }
 
 async function minusCount(i) {
