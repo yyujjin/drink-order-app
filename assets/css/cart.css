@@ -4,6 +4,11 @@ body {
     background-size: 405px;
     background-position-x: center;
     font-family: "NanumBarunGothicYetHangul";
+    width: 100vw; /*화면 크기에 맞춰서 알아서 꽉 채워라 100%이 최대 */
+    /* width: 1000px;px로 하면은 컴퓨터마다 화면이 달라서 힘듦. */
+    margin: 0; 
+    /* 0은 단위로 안 붙여도 돼. => 아예없애라는 뜻이라서 단위를 붙이는게 의미가 없다. */
+    /* 브라우저의 기본설정이 이미 들어가 있어서 css로 없애주는거 */
 }
 
 #list-button {
@@ -48,16 +53,12 @@ body {
 #total-pay {
     font-family: "NanumBarunGothicYetHangul";
     position: fixed;
-    top: 605px;
-    /* margin-top: 50px; */
-    margin-left: -8px;
-    padding-top: 20px;
-    padding-left: 120px;
-    width: 255px;
-    height: 45px;
-    border: 1px solid black;
+    bottom: 0;
+    width: 100%;
+    height: 70px;
     background-color: rgb(255, 221, 0);
     border: none;
+    font-size: 15px;
 }
 #space {
     border: 1px solid black;
