@@ -37,20 +37,6 @@ func main() {
 		c.HTML(http.StatusOK, "cart.html", gin.H{})
 	})
 
-	r.POST("/addToCart/:id", func(c *gin.Context) {
-		id, _ := strconv.Atoi(c.Param("id"))
-		for i := 0; i < len(cartItems); i++ {
-			if drinkItems[id].Name == cartItems[i].Name {
-				cartItems[i].Count += 1
-				cartItems[i].Price += drinkItems[id].Price
-				fmt.Println(cartItems)
-				return
-			}
-		}
-		cartItems = append(cartItems, drinkItems[id])
-		fmt.Println(cartItems)
-	})
-
 	r.GET("/getCartItems", func(c *gin.Context) {
 		c.JSON(200, cartItems)
 	})
@@ -68,43 +54,6 @@ func main() {
 			}
 		}
 		c.IndentedJSON(http.StatusNotFound, gin.H{"message": "album not found"})
-	})
-
-	r.GET("/getTotalPrice", func(c *gin.Context) {
-		var totalPrice int
-		for index := range cartItems {  
-
-		totalPrice += cartItems[index].Price
-		}
-		fmt.Println(totalPrice)
-		c.JSON(200, totalPrice)
-	})
-
-	r.PUT("/plusCount/:id", func(c *gin.Context) {
-		id, _ := strconv.Atoi(c.Param("id"))
-		cartItems[id].Count += 1
-		for index,value := range drinkItems { 
-			if cartItems[id].Name == drinkItems[index].Name {
-				cartItems[id].Price += value.Price
-				c.Redirect(http.StatusFound, "/getTotalPrice")
-				return
-			}
-		}
-	})
-
-	r.PUT("/minusCount/:id", func(c *gin.Context) {
-		id, _ := strconv.Atoi(c.Param("id"))
-		if cartItems[id].Count ==1 {
-			return
-		}
-		cartItems[id].Count -= 1
-		for index,value := range drinkItems { 
-			if cartItems[id].Name == drinkItems[index].Name {
-				cartItems[id].Price -= value.Price
-				c.Redirect(http.StatusFound, "/getTotalPrice")
-				return
-			}
-		}
 	})
 
 	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
