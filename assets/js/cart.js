@@ -11,15 +11,13 @@ async function getCartItems() {
     items = await res.json()
     console.log(items)
     makeDrinkList()
-   
-
 }
 
 function makeDrinkList() {
     const orderList = document.querySelector("#order-list")
     orderList.innerHTML = ""
     for (let i = 0; i < items.length; i++) {
-        orderList.innerHTML += `<div class="lists"  id="${adjustSpacing(i)}">
+        orderList.innerHTML += `<div class="lists">
             <div class="drink-image" >
                 <img src="${items[i].Src}" width="60" height="100" alt="">
             </div>
@@ -46,12 +44,6 @@ document.addEventListener("click", function (event) {
         minusCount(event.target.dataset.index) //html에서 data 속성 가지고 오는 법 data-index(개발자 맘)
     }
 })
-
-function adjustSpacing(i) {
-    if (i == 0) {
-        return "first-list"
-    }
-}
 
 async function deleteList(i) {
     const confirmDelete = confirm("삭제하시겠습니까?")
