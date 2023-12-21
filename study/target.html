@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            div,
+            div * {
+                border: 1px solid gray;
+                padding: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            div
+            <p>p</p>
+        </div>
+
+        <hr />
+
+        <div id="list">
+            list
+            <button class="edit a b c">edit</button>
+            <button class="delete">delete</button>
+            <button class="a b c">a b c</button>
+        </div>
+
+        <script>
+            document.querySelector("p").addEventListener("click", clickElement)
+
+            document
+                .querySelector("div")
+                .addEventListener("click", clickElement)
+
+            function clickElement(event) {
+                // p를 누르면 p 태그 정보가, div를 누르면 div 정보가 나오도록 출력!
+                console.log(event.target)
+                console.log("anything click")
+            }
+
+            // list
+            document
+                .querySelector("#list")
+                .addEventListener("click", function (event) {
+                    alert("List")
+                })
+            
+                document.addEventListener("click",function(evnet){
+                    console.log(event.target)
+                })
+        
+            // let button = document.querySelectorAll("button")
+            // console.log(button)
+            // for (let i = 0; i < button.length; i++) {
+            //     button[i].addEventListener("click", function (event) {
+            //         // edit를 클릭하면 edit 경고창만 출력되고 list 경고창은 나오면 안됨
+            //         // event.preventDefault() => 태그의 기본기능을 막는거 form 에도 썼었음
+            //         event.stopPropagation()
+            //         //부모요소로 이벤트 전파 막는법
+            //         // event target의 class List를 콘솔로 출력
+            //         //클릭한 요소의 클래스를 찾는거라서 target이 필요함
+            //         if (event.target.classList.contains("edit")) {
+            //             alert("edit 클릭")
+            //             console.log(event.target.classList)
+            //         }
+            //         if (event.target.classList.contains("delete")) {
+            //             alert("delete 클릭")
+            //         }
+            //         console.log(event.target.classList.contains("edit"))
+            //         //classList.contains() = 요소가 클래스를 가지고 있는지 검사하는거 있으면 트루 없으면 폴스
+            //     })
+            // }
+
+            //이벤트 위임 방식
+            // document.addEventListener("click", function (event) {
+            //     if (event.target.classList.contains("edit")) {
+            //         alert("edit 클릭")
+            //     } else if (event.target.classList.contains("delete")) {
+            //         alert("delete 클릭")
+            //     } else {
+            //         alert("nothing")
+            //     }
+            // })
+            
+        </script>
+    </body>
+</html>
+
+<!-- delete를 선택ㄴ했는데 왜 list 알람이 뜸
+delete는 이벤트 리스너가 없는데?
+버블링은 이벤트 리스너 있는 애들로만 작동하는거아님?
+delete 버튼은 이벤트 리스너가 없으니 위에도 동작안해야되는거 아니냐구 -->

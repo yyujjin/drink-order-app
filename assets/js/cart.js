@@ -3,6 +3,7 @@ goToListButton.addEventListener("click", function () {
     location.href = "http://localhost:8080/list"
 })
 
+//async = 비동기방식
 let items
 getCartItems()
 async function getCartItems() {
@@ -10,6 +11,8 @@ async function getCartItems() {
     items = await res.json()
     console.log(items)
     makeDrinkList()
+   
+
 }
 
 function makeDrinkList() {
@@ -23,30 +26,26 @@ function makeDrinkList() {
             <ul>
                 <li>품명 : ${items[i].Name}</li>  
                 <li>가격 : ${items[i].Price} 원</li>    
-                <li>수량 : <button class="minusCounts" >-</button>${
+                <li>수량 : <button class="minusCounts" data-index=${i} >-</button>${
                     items[i].Count
                 }개
-                <button class="plusCounts" >+</button></li>      
-                <button class="delete-buttons">x</button>
+                <button class="plusCounts" data-index=${i}>+</button></li>      
+                <button class="delete-buttons" data-index=${i}>x</button>
             </ul>
         </div>`
     }
-    const deleteButtons = document.querySelectorAll(".delete-buttons")
-    const plusCounts = document.querySelectorAll(".plusCounts")
-    const minusCounts = document.querySelectorAll(".minusCounts")
-    for (let i = 0; i < deleteButtons.length; i++) {
-        deleteButtons[i].addEventListener("click", function () {
-            deleteList(i)
-        })
-        plusCounts[i].addEventListener("click", function () {
-            plusCount(i)
-        })
-        minusCounts[i].addEventListener("click", function () {
-            minusCount(i)
-        })
-    }
-    getTotalPrice()
+    totalPrice()
 }
+
+document.addEventListener("click", function (event) {
+    if (event.target.classList.contains("delete-buttons")) {
+        deleteList(event.target.dataset.index)
+    } else if (event.target.classList.contains("plusCounts")) {
+        plusCount(event.target.dataset.index)
+    } else if (event.target.classList.contains("minusCounts")) {
+        minusCount(event.target.dataset.index) //html에서 data 속성 가지고 오는 법 data-index(개발자 맘)
+    }
+})
 
 function adjustSpacing(i) {
     if (i == 0) {
@@ -64,37 +63,28 @@ async function deleteList(i) {
             method: "DELETE",
         })
         getCartItems()
-        getTotalPrice()
     } catch (error) {
         console.error("네트워크 오류:", error)
     }
 }
 
-getTotalPrice()
-function getTotalPrice() {
-    // items에 있는 객체의 count와 prcie를 계산
-    // 각 객체의 count * price 한 값을 모두 더하기!
-    // 숙제!!
-  
-    // 실행하면 에러나니깐 일단 주석 처리
-    // const totalPrice = document.querySelector("span")
-    // totalPrice.innerHTML = `${price}`
+function totalPrice() {
+    let total = 0
+    for (let i = 0; i < items.length; i++) {
+        total += items[i].Count * items[i].Price
+    }
+    console.log(total)
+    document.querySelector("#totalPay").innerHTML=`${total}`
 }
 
 function plusCount(selectedIndex) {
-    // 기존 count에서 +1 한 값을 다시 저장하기
-    items[selectedIndex].Count += 1 
+    items[selectedIndex].Count += 1
     console.log(items[selectedIndex])
     makeDrinkList()
 }
 
-async function minusCount(i) {
-    try {
-        await fetch(`http://localhost:8080/minusCount/${i}`, {
-            method: "PUT",
-        })
-        getCartItems()
-    } catch (error) {
-        console.error("네트워크 오류:", error)
-    }
+function minusCount(selectedIndex) {
+    items[selectedIndex].Count -= 1
+    console.log(items[selectedIndex])
+    makeDrinkList()
 }
