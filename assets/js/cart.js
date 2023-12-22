@@ -67,7 +67,7 @@ function totalPrice() {
     }
     console.log(total)
     document.querySelector("#totalPay").innerHTML=`${total}`
-}
+    }
 
 function plusCount(selectedIndex) {
     items[selectedIndex].Count += 1

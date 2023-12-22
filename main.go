@@ -27,7 +27,7 @@ func main() {
 		{"카페 모카", 6000, "../assets/images/CafeMocha.png", 1},
 		{"레몬 에이드", 5000, "../assets/images/LemonAde.png", 1},
 	}
-	var cartItems = []drinkItem{}
+		var cartItems = []drinkItem{}
 
 	r.GET("/list", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "list.html", gin.H{})
@@ -41,6 +41,20 @@ func main() {
 		c.JSON(200, cartItems)
 	})
 
+	r.POST("/addToCart/:id", func(c *gin.Context) {
+		id, _ := strconv.Atoi(c.Param("id"))
+		for i := 0; i < len(cartItems); i++ {
+			if drinkItems[id].Name == cartItems[i].Name {
+				cartItems[i].Count += 1
+				cartItems[i].Price += drinkItems[id].Price
+				fmt.Println(cartItems)
+				return
+			}
+		}
+		cartItems = append(cartItems, drinkItems[id])
+		fmt.Println(cartItems)
+	})
+	
 	r.DELETE("/deleteItem/:id", func(c *gin.Context) {
 		id, err := strconv.Atoi(c.Param("id"))
 		if err != nil {
@@ -58,7 +72,7 @@ func main() {
 
 	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 
-	// 리스트에서 음료를 추가 1 -> 장바구니에 담기 위해 서버에 추가 
+	// 리스트에서 음료를 추가 1 -> 장바구니에 담기 위해 서버에 추가
 	// 사용자가 장바구니에서 수량을 변경 5 -> 서버 X . 클라 내부적으로 수량 변경
 	// 주문하기 버튼을 누르면 최종 수량을 서버로 전달
 
