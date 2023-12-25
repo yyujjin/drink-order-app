@@ -24,9 +24,7 @@ function makeDrinkList() {
             <ul>
                 <li>품명 : ${items[i].Name}</li>  
                 <li>가격 : ${items[i].Price} 원</li>    
-                <li>수량 : <button class="minusCounts" data-index=${i} >-</button>${
-                    items[i].Count
-                }개
+                <li>수량 : <button class="minusCounts" data-index=${i} >-</button>${items[i].Count}개
                 <button class="plusCounts" data-index=${i}>+</button></li>      
                 <button class="delete-buttons" data-index=${i}>x</button>
             </ul>
@@ -66,8 +64,16 @@ function totalPrice() {
         total += items[i].Count * items[i].Price
     }
     console.log(total)
-    document.querySelector("#totalPay").innerHTML=`${total}`
-    }
+    document.querySelector("#totalPay").innerHTML = `${total}`
+    document
+        .querySelector("#total-pay")
+        .addEventListener("click", async function () {
+            await fetch(`http://localhost:8080/sendCartItems`, {
+                method: "POST",
+                body: JSON.stringify(items), 
+            })
+        })
+}
 
 function plusCount(selectedIndex) {
     items[selectedIndex].Count += 1

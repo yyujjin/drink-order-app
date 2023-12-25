@@ -13,10 +13,10 @@ func main() {
 	r.Static("/assets", "./assets")
 
 	type drinkItem struct {
-		Name  string
-		Price int
-		Src   string
-		Count int
+		Name  string `json:"Name"`
+		Price int    `json:"Price"`
+		Src   string `json:"Src"`
+		Count int    `json:"Count"`
 	}
 
 	var drinkItems = []drinkItem{
@@ -27,12 +27,11 @@ func main() {
 		{"카페 모카", 6000, "../assets/images/CafeMocha.png", 1},
 		{"레몬 에이드", 5000, "../assets/images/LemonAde.png", 1},
 	}
-		var cartItems = []drinkItem{}
+	var cartItems = []drinkItem{}
 
 	r.GET("/list", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "list.html", gin.H{})
 	})
-
 	r.GET("/cart", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "cart.html", gin.H{})
 	})
@@ -43,18 +42,24 @@ func main() {
 
 	r.POST("/addToCart/:id", func(c *gin.Context) {
 		id, _ := strconv.Atoi(c.Param("id"))
-		for i := 0; i < len(cartItems); i++ {
-			if drinkItems[id].Name == cartItems[i].Name {
-				cartItems[i].Count += 1
-				cartItems[i].Price += drinkItems[id].Price
-				fmt.Println(cartItems)
-				return
-			}
-		}
 		cartItems = append(cartItems, drinkItems[id])
 		fmt.Println(cartItems)
 	})
-	
+
+	r.POST("/sendCartItems", func(c *gin.Context) {
+		fmt.Println("정상")
+		var cartItems []drinkItem //js에서 배열로 넘겨줬기때문에 배열로 객체를 받아야한다.
+		if err := c.BindJSON(&cartItems); err != nil { //BindJSON => 제이슨을 객체로 바꿔주는거 ,실행하면 에러를 무조건 반환하는 함수 
+			// 실행해서 에러를 err변수에 담고 만약 err에 값이 담겼으면 return해라 는 거  
+			// err := c.BindJSON(&cartItems)
+			// if err != nil {
+
+			// }
+			// return 이걸 줄여쓴거 
+		}
+		fmt.Println(cartItems)
+	})
+
 	r.DELETE("/deleteItem/:id", func(c *gin.Context) {
 		id, err := strconv.Atoi(c.Param("id"))
 		if err != nil {
