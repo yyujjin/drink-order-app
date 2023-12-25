@@ -12,12 +12,16 @@ func main() {
 	r.LoadHTMLGlob("templates/*")
 	r.Static("/assets", "./assets")
 
+	//필드/ 데이터타입/ 컨텐츠타입
 	type drinkItem struct {
 		Name  string `json:"Name"`
 		Price int    `json:"Price"`
 		Src   string `json:"Src"`
 		Count int    `json:"Count"`
 	}
+// 이렇게 적음으로써 이 구조체는 json만 담을 수 있음 
+
+	//데이터를 body에 담아서 서버로 보내는 방법에는 form 태그,제이슨 등등이 있는데 
 
 	var drinkItems = []drinkItem{
 		{"아메리카노", 4500, "../assets/images/Americano.png", 1},
@@ -38,6 +42,10 @@ func main() {
 
 	r.GET("/getCartItems", func(c *gin.Context) {
 		c.JSON(200, cartItems)
+	})
+
+	r.GET("/getDrinkItems", func(c *gin.Context) {
+		c.JSON(200, drinkItems)
 	})
 
 	r.POST("/addToCart/:id", func(c *gin.Context) {
