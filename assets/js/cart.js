@@ -2,16 +2,27 @@ const goToListButton = document.querySelector("#list-button")
 goToListButton.addEventListener("click", function () {
     location.href = "http://localhost:8080/list"
 })
-
+//이거 밑에 추가하기 
+//js는 함수먼저 호출이던가?
 //async = 비동기방식
-let items
-getCartItems()
-async function getCartItems() {
-    const res = await fetch("http://localhost:8080/getCartItems") //await => 데이터를 가지고 온후에 밑에 코드 실행
-    items = await res.json()
-    console.log(items)
-    makeDrinkList()
-}
+//이걸 API가 아니라 로컬스토리지에 있는 정보로 재구현하는걸로 바꾸기 
+let items = JSON.parse(localStorage.getItem("cartItems"))
+// function makeCartList() {
+   
+//     // let items = localStorage.getItem(JSON.parse("cartItems"))
+//     // JSON.parse(items)
+//     console.log(items)
+//     makeDrinkList()
+// }
+
+// makeCartList()
+// getCartItems()
+// async function getCartItems() {
+//     const res = await fetch("http://localhost:8080/getCartItems") //await => 데이터를 가지고 온후에 밑에 코드 실행
+//     items = await res.json()
+//     console.log(items)
+    makeDrinkList(items)
+// }
 
 
 function makeDrinkList() {
