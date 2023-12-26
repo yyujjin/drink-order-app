@@ -1,10 +1,20 @@
+//async = 비동기방식
+//js는 함수먼저 호출이던가?
+//이거 밑에 추가하기 
 const goToListButton = document.querySelector("#list-button")
 goToListButton.addEventListener("click", function () {
     location.href = "http://localhost:8080/list"
 })
-//이거 밑에 추가하기 
-//js는 함수먼저 호출이던가?
-//async = 비동기방식
+
+
+// let drinkItems = []
+// getDrinkItems()
+// async function getDrinkItems() {
+//     const res = await fetch("http://localhost:8080/getDrinkItems")
+//     drinkItems = await res.json()
+// }
+// console.log(drinkItems) //이건 또 왜 값 안가져와짐
+
 //이걸 API가 아니라 로컬스토리지에 있는 정보로 재구현하는걸로 바꾸기 
 let items = JSON.parse(localStorage.getItem("cartItems"))
 // function makeCartList() {

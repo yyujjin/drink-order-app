@@ -14,6 +14,7 @@ func main() {
 
 	//필드/ 데이터타입/ 컨텐츠타입
 	type drinkItem struct {
+		Id int `json:Id`
 		Name  string `json:"Name"`
 		Price int    `json:"Price"`
 		Src   string `json:"Src"`
@@ -24,12 +25,12 @@ func main() {
 	//데이터를 body에 담아서 서버로 보내는 방법에는 form 태그,제이슨 등등이 있는데 
 
 	var drinkItems = []drinkItem{
-		{"아메리카노", 4500, "../assets/images/Americano.png", 1},
-		{"카라멜 마끼아또", 6500, "../assets/images/CaramelMacchiato.png", 1},
-		{"민트초코 프라페", 6500, "../assets/images/MintChocolate Frappe.png", 1},
-		{"자몽 스무디", 5000, "../assets/images/Grapefruit Smoothie.png", 1},
-		{"카페 모카", 6000, "../assets/images/CafeMocha.png", 1},
-		{"레몬 에이드", 5000, "../assets/images/LemonAde.png", 1},
+		{1,"아메리카노", 4500, "../assets/images/Americano.png", 1},
+		{2,"카라멜 마끼아또", 6500, "../assets/images/CaramelMacchiato.png", 1},
+		{3,"민트초코 프라페", 6500, "../assets/images/MintChocolate Frappe.png", 1},
+		{4,"자몽 스무디", 5000, "../assets/images/Grapefruit Smoothie.png", 1},
+		{5,"카페 모카", 6000, "../assets/images/CafeMocha.png", 1},
+		{6,"레몬 에이드", 5000, "../assets/images/LemonAde.png", 1},
 	}
 	var cartItems = []drinkItem{}
 
