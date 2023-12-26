@@ -48,11 +48,6 @@ func main() {
 		c.JSON(200, drinkItems)
 	})
 
-	r.POST("/addToCart/:id", func(c *gin.Context) {
-		id, _ := strconv.Atoi(c.Param("id"))
-		cartItems = append(cartItems, drinkItems[id])
-		fmt.Println(cartItems)
-	})
 
 	r.POST("/sendCartItems", func(c *gin.Context) {
 		fmt.Println("정상")
