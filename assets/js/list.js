@@ -40,7 +40,8 @@ function putItemToCart(i) {
     console.log(cartItems)
     localStorage.setItem("cartItems", JSON.stringify(cartItems))
 
-    if (!confirm) {"추가가 완료 되었습니다! 장바구니로 이동하시겠습니까?"
+    if (!confirm) {
+        ;("추가가 완료 되었습니다! 장바구니로 이동하시겠습니까?")
         return
     }
     location.href = "http://localhost:8080/cart"
