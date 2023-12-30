@@ -64,14 +64,12 @@ async function deleteList(i) {
     if (!confirmDelete) {
         return
     }
-    try {
-        await fetch(`http://localhost:8080/deleteItem/${i}`, {
-            method: "DELETE",
-        })
-        getCartItems()
-    } catch (error) {
-        console.error("네트워크 오류:", error)
-    }
+    items.splice(i,1)
+    console.log(items)
+    localStorage.setItem("cartItems", JSON.stringify(items))
+    makeDrinkList()
+   // 로컬 스토리지에서 클릭한 아이템 제거한 후 다시 저장
+   //['아아']
 }
 //토탈금액 잘 나오게 하기
 function totalPrice() {
