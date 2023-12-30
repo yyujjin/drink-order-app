@@ -3,21 +3,30 @@ goToListButton.addEventListener("click", function () {
     location.href = "http://localhost:8080/list"
 })
 
+let drinkItems = []
+getDrinkItems()
+async function getDrinkItems() {
+    const res = await fetch("http://localhost:8080/getDrinkItems")
+    drinkItems = await res.json()
+    makeDrinkList()
+}
 let items = JSON.parse(localStorage.getItem("cartItems"))
-
-makeDrinkList(items)
 
 function makeDrinkList() {
     const orderList = document.querySelector("#order-list")
     orderList.innerHTML = ""
     for (let i = 0; i < items.length; i++) {
+        const foundIndex = drinkItems.findIndex(function (a) {
+            //여기서 foundIndex는 변수로 선언해야되는거지? 상수선언해도 되는데 왜지 값이 바뀌는데?
+            return a.Id == items[i].Id
+        })
         orderList.innerHTML += `<div class="lists">
             <div class="drink-image" >
-                <img src="${items[i].Src}" width="60" height="100" alt="">
+                <img src="${drinkItems[foundIndex].Src}" width="60" height="100" alt="">
             </div>
             <ul>
-                <li>품명 : ${items[i].Name}</li>  
-                <li>가격 : ${items[i].Price} 원</li>    
+                <li>품명 : ${drinkItems[foundIndex].Name}</li>  
+                <li>가격 : ${drinkItems[foundIndex].Price} 원</li>    
                 <li>수량 : <button class="minusCounts" data-index=${i} >-</button>${items[i].Count}개
                 <button class="plusCounts" data-index=${i}>+</button></li>      
                 <button class="delete-buttons" data-index=${i}>x</button>
@@ -53,7 +62,7 @@ async function deleteList(i) {
         console.error("네트워크 오류:", error)
     }
 }
-
+//토탈금액 잘 나오게 하기
 function totalPrice() {
     let total = 0
     for (let i = 0; i < items.length; i++) {
@@ -82,3 +91,4 @@ function minusCount(selectedIndex) {
 }
 
 localStorage.removeItem("name")
+
