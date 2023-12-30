@@ -24,6 +24,7 @@ function putItemToCart(i) {
 
     const data = JSON.parse(localStorage.getItem("cartItems"))
     const cartItems = data == undefined ? [] : data
+    
     const foundIndex = cartItems.findIndex(function (a) {
         return a.Id == drinkItems[i].Id
     })
