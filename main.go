@@ -49,7 +49,6 @@ func main() {
 				maxValue = count
 				maxId = id
 			}
-
 		}
 		fmt.Println(maxId)
 		fmt.Println("토탈", totalCountList)
@@ -57,42 +56,16 @@ func main() {
 	})
 
 	r.POST("/sendCartItems", func(c *gin.Context) {
-		fmt.Println("정상")
 		var cartItems []drinkItem
 		if err := c.BindJSON(&cartItems); err != nil {
 			return
 		}
-		// TODO for range
-		//totalCountList[cartItems[0].Id] = cartItems[0].Count
 		fmt.Println(cartItems)
-		//[{id: 1, count: 3}, 2, 5]
-		//[{id: 1, count: 2}, 2, 5]
 		for index := range cartItems {
-			//totalCountList = append(totalCountList,cartItems[index].)
 
-			//카운터를 누적시킨다....
-
-			// 버튼을 눌렸을 때 카트아이템스가 넘어오고 토탈카운트리스트에 담기는데
-			//만약 토탈카운트리스트아이디랑 카트아아팀의 아이디가 있다면 그 아이디의 밸류값을 카운트아이템의 카운트만큼 플러스시켜라
-			// 토탈 카운트리스트에 현재 아이템의 아이디가 없다면 새로운 키 추가
-			//그게아니라면 토탈카운트리스트의 기존 값에  카트아이템의 카운트 누적시켜라
-
-			// totalCountList {1: 5, 2: 1}
-			// cartItems : {1:1}, {2: 2}
-
-			// after totalCountList: {1:6},{2:3}
-			// cartItems : {1:1}, {4: 1}
-
-			// after totalCountList: {1:7 2:3 4:1}
-			totalCountList[cartItems[index].Id] += cartItems[index].Count
-			//totalCountList[cartItems[index].Id] = totalCountList[cartItems[index].Id]+cartItems[index].Count
-
-			//fmt.Println(totalCountList[cartItems[index].Id]) //값 가져옴
-
+			totalCountList[cartItems[index].Id] = totalCountList[cartItems[index].Id] + cartItems[index].Count
 		}
-		fmt.Println("83", totalCountList)
-		// {1: 5, 2: 1, 5: 1}
-		// {1: 5} 이런색으로 키는 아이디, 벨류는 카운트가 담
+		fmt.Println("토탈카운트", totalCountList)
 	})
 
 	r.DELETE("/deleteItem/:id", func(c *gin.Context) {
