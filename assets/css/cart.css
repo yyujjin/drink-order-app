@@ -27,7 +27,7 @@ body {
     border-left: none;
     border-right: none;
     border-top: none;
-    width: 350px;
+    width: 360px;
 }
 
 .lists:first {
@@ -42,7 +42,7 @@ body {
 
 .delete-buttons {
     background-color: rgb(255, 255, 255);
-    border: outset rgb(154, 150, 150) 1px;
+    border: solid rgb(18, 18, 18) 2px;
     float: right;
     margin: 10px;
     margin-right: 18px;
@@ -72,4 +72,16 @@ body {
     margin-right: 5px;
     background-color: rgb(255, 255, 255);
     font-size: 20px;
+}
+
+#bestIcon{
+    cursor: pointer;
+    width: 70px;
+    height: 73px;
+    /* border: solid black 1px; */
+    float: right;
+    margin-top: -30px;
+    
+
+    
 }

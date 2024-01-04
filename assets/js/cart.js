@@ -16,7 +16,7 @@ function makeDrinkList() {
     const orderList = document.querySelector("#order-list")
     orderList.innerHTML = ""
     for (let i = 0; i < items.length; i++) {
-        const foundItem = drinkItems.find(function (a) { //이걸 따로 함수로 빼려면?
+        const foundItem = drinkItems.find(function (a) {
             return a.Id == items[i].Id
         })
         orderList.innerHTML += `<div class="lists">
@@ -29,7 +29,7 @@ function makeDrinkList() {
                 <li>수량 : <button class="minusCounts" data-index=${i} >-</button>${items[i].Count}개
                 <button class="plusCounts" data-index=${i}>+</button></li>      
                 <button class="delete-buttons" data-index=${i}>x</button>
-                <p>Hit!</p>
+                <p>BEST</p>
             </ul>
         </div>`
     }
@@ -62,12 +62,13 @@ async function deleteList(i) {
 function totalPrice() {
     let total = 0
     for (let i = 0; i < items.length; i++) {
-        const foundItem = drinkItems.find(function (a) { 
+        const foundItem = drinkItems.find(function (a) {
             return a.Id == items[i].Id
         })
-        total += items[i].Count * foundItem.Price 
+        total += items[i].Count * foundItem.Price
     }
     document.querySelector("#totalPay").innerHTML = total
+    const image = document.querySelector("#myImage")
     console.log(total)
 }
 
@@ -78,27 +79,19 @@ async function sendCartItems() {
         body: JSON.stringify(items),
     })
 }
-//플러스 버튼눌렀을 때 items 값 갱신시키고 로컬스토리지에 업뎃
+
 function plusCount(selectedIndex) {
     items[selectedIndex].Count += 1
     localStorage.setItem("cartItems", JSON.stringify(items))
     makeDrinkList()
 }
 
-//마이너스 버튼눌렀을 때 items 값 갱신시키고 로컬스토리지에 업뎃
 function minusCount(selectedIndex) {
-    //수량이 1미만이면 작동 막는 코드
-    if (items[selectedIndex].Count==1) {
+    if (items[selectedIndex].Count == 1) {
+        alert("최소 주문 수량입니다.")
         return
-    } 
+    }
     items[selectedIndex].Count -= 1
     localStorage.setItem("cartItems", JSON.stringify(items))
     makeDrinkList()
 }
-
-
-
-//토탈금액 잘 나오게 하기
- //플러스 버튼 누르면 로컬스토리지 카운트 올라가게 하기
-//마이너스 버튼 누르면 로컬스토리지 카운트 내려가게 하기
-//카운트가 1미만이 되면 작동 멈추기
