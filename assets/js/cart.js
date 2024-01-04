@@ -16,10 +16,9 @@ function makeDrinkList() {
     const orderList = document.querySelector("#order-list")
     orderList.innerHTML = ""
     for (let i = 0; i < items.length; i++) {
-        const foundItem = drinkItems.find(function (a) {
+        const foundItem = drinkItems.find(function (a) { //이걸 따로 함수로 빼려면?
             return a.Id == items[i].Id
         })
-        console.log(foundItem)
         orderList.innerHTML += `<div class="lists">
             <div class="drink-image" >
                 <img src="${foundItem.Src}" width="60" height="100" alt="">
@@ -63,7 +62,10 @@ async function deleteList(i) {
 function totalPrice() {
     let total = 0
     for (let i = 0; i < items.length; i++) {
-        total += items[i].Count * items[i].Price
+        const foundItem = drinkItems.find(function (a) { 
+            return a.Id == items[i].Id
+        })
+        total += items[i].Count * foundItem.Price 
     }
     console.log(total)
 }
@@ -75,17 +77,27 @@ async function sendCartItems() {
         body: JSON.stringify(items),
     })
 }
-
+//플러스 버튼눌렀을 때 items 값 갱신시키고 로컬스토리지에 업뎃
 function plusCount(selectedIndex) {
     items[selectedIndex].Count += 1
-    console.log(items[selectedIndex])
+    localStorage.setItem("cartItems", JSON.stringify(items))
     makeDrinkList()
 }
 
+//마이너스 버튼눌렀을 때 items 값 갱신시키고 로컬스토리지에 업뎃
 function minusCount(selectedIndex) {
+    //수량이 1미만이면 작동 막는 코드
+    if (items[selectedIndex].Count==1) {
+        return
+    } 
     items[selectedIndex].Count -= 1
-    console.log(items[selectedIndex])
+    localStorage.setItem("cartItems", JSON.stringify(items))
     makeDrinkList()
 }
 
-localStorage.removeItem("name")
+
+
+//토탈금액 잘 나오게 하기
+ //플러스 버튼 누르면 로컬스토리지 카운트 올라가게 하기
+//마이너스 버튼 누르면 로컬스토리지 카운트 내려가게 하기
+//카운트가 1미만이 되면 작동 멈추기
