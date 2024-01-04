@@ -67,6 +67,7 @@ function totalPrice() {
         })
         total += items[i].Count * foundItem.Price 
     }
+    document.querySelector("#totalPay").innerHTML = total
     console.log(total)
 }
 
