@@ -25,6 +25,11 @@ function makeDrinkItemList() {
             alt=""
         />
         <span>${drinkItems[i].Name}</span<
+        <img
+                    id="bestIcon"
+                    src="../assets/images/best-icon.jpg"
+                    alt=""
+                />
         </button>`
     }
 }
