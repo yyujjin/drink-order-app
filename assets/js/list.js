@@ -8,6 +8,25 @@ getDrinkItems()
 async function getDrinkItems() {
     const res = await fetch("http://localhost:8080/getDrinkItems")
     drinkItems = await res.json()
+    console.log(drinkItems)
+    makeDrinkItemList()
+}
+
+function makeDrinkItemList() {
+    document.querySelector("#drinkList").innerHTML = ""
+    for (let i = 0; i < drinkItems.length; i++) {
+        document.querySelector(
+            "#drinkList"
+        ).innerHTML += `<button class="drinks">
+            <img
+            src="${drinkItems[i].Src}"
+            width="60"
+            height="95"
+            alt=""
+        />
+        <span>${drinkItems[i].Name}</span<
+        </button>`
+    }
 }
 
 const drinks = document.querySelectorAll(".drinks")
@@ -24,7 +43,7 @@ function putItemToCart(i) {
 
     const data = JSON.parse(localStorage.getItem("cartItems"))
     const cartItems = data == undefined ? [] : data
-    
+
     const foundIndex = cartItems.findIndex(function (a) {
         return a.Id == drinkItems[i].Id
     })

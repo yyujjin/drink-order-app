@@ -74,14 +74,3 @@ body {
     font-size: 20px;
 }
 
-#bestIcon{
-    cursor: pointer;
-    width: 70px;
-    height: 73px;
-    /* border: solid black 1px; */
-    float: right;
-    margin-top: -30px;
-    
-
-    
-}

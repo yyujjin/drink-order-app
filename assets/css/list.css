@@ -9,9 +9,11 @@ button {
     width: 100px;
     height: 100px;
     cursor: pointer;
-    position: fixed;
     font-family: "NanumBarunGothicYetHangul";
     border-radius: 30%;
+    display: flex;
+    flex-direction: column;
+    background: none;
 }
 #cart-button {
     cursor: pointer;
@@ -21,28 +23,26 @@ button {
     height: 40px;
     position: fixed;
     left: 320px;
+    top: 5px;
 }
-#americano {
-    top: 100px;
-    left: 70px;
+
+#bestIcon {
+    cursor: pointer;
+    width: 40px;
+    height: 43px;
+    /* border: solid black 1px; */
+    float: right;
+    margin-top: -30px;
+    position: absolute;
 }
-#caramel {
-    top: 100px;
-    left: 220px;
+
+#drinkList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 80px;
 }
-#mint {
-    top: 280px;
-    left: 70px;
-}
-#grape {
-    top: 280px;
-    left: 220px;
-}
-#mocha {
-    top: 460px;
-    left: 70px;
-}
-#remon {
-    top: 460px;
-    left: 220px;
+
+.drinks span {
+    margin-top: 10px;
 }
