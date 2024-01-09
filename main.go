@@ -50,10 +50,25 @@ func main() {
 				maxId = id
 			}
 		}
+
 		fmt.Println(maxId)
 		fmt.Println("토탈", totalCountList)
-		c.JSON(200, drinkItems)
+
+		type response struct {
+			DrinkItems []drinkItem
+			MaxId      int
+		}
+
+		Response := response{
+			drinkItems, maxId,
+		}
+		fmt.Println(Response)
+		//{"drinkItems": [], "maxId": 0}
+		c.JSON(200, Response)
 	})
+
+	//겟드링크에서 js로 값을 2개 보내야해서 이걸 보내려면 구조체를 만들어야하나을 이용해야하고
+	//드링크 아이템이랑 maxid를 같이 내보내삼.
 
 	r.POST("/sendCartItems", func(c *gin.Context) {
 		var cartItems []drinkItem

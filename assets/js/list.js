@@ -3,28 +3,28 @@ cartButton.addEventListener("click", function () {
     location.href = "http://localhost:8080/cart"
 })
 
-let drinkItems = []
+let data
 getDrinkItems()
 async function getDrinkItems() {
     const res = await fetch("http://localhost:8080/getDrinkItems")
-    drinkItems = await res.json()
-    console.log(drinkItems)
+    data = await res.json()
+    console.log(data)
     makeDrinkItemList()
 }
 
 function makeDrinkItemList() {
     document.querySelector("#drinkList").innerHTML = ""
-    for (let i = 0; i < drinkItems.length; i++) {
+    for (let i = 0; i < data.DrinkItems.length; i++) {
         document.querySelector(
             "#drinkList"
         ).innerHTML += `<button class="drinks">
             <img
-            src="${drinkItems[i].Src}"
+            src="${data.DrinkItems[i].Src}"
             width="60"
             height="95"
             alt=""
         />
-        <span>${drinkItems[i].Name}</span<
+        <span>${data.DrinkItems[i].Name}</span>
         <img
                     id="bestIcon"
                     src="../assets/images/best-icon.jpg"
@@ -50,13 +50,13 @@ function putItemToCart(i) {
     const cartItems = data == undefined ? [] : data
 
     const foundIndex = cartItems.findIndex(function (a) {
-        return a.Id == drinkItems[i].Id
+        return a.Id == data[i].Id
     })
 
     if (foundIndex == -1) {
         cartItems.push({
-            Id: drinkItems[i].Id,
-            Count: drinkItems[i].Count,
+            Id: data[i].Id,
+            Count: data[i].Count,
         })
     } else {
         cartItems[foundIndex].Count += 1

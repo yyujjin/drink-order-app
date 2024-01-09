@@ -3,11 +3,12 @@ goToListButton.addEventListener("click", function () {
     location.href = "http://localhost:8080/list"
 })
 
-let drinkItems = []
+let data = []
 getDrinkItems()
 async function getDrinkItems() {
     const res = await fetch("http://localhost:8080/getDrinkItems")
-    drinkItems = await res.json()
+    data = await res.json() //JSON.parse 역할 함. 객체로 변환돼서 담김.
+    console.log(data)
     makeDrinkList()
 }
 let items = JSON.parse(localStorage.getItem("cartItems"))
@@ -16,7 +17,7 @@ function makeDrinkList() {
     const orderList = document.querySelector("#order-list")
     orderList.innerHTML = ""
     for (let i = 0; i < items.length; i++) {
-        const foundItem = drinkItems.find(function (a) {
+        const foundItem = data.find(function (a) {
             return a.Id == items[i].Id
         })
         orderList.innerHTML += `<div class="lists">
@@ -62,7 +63,7 @@ async function deleteList(i) {
 function totalPrice() {
     let total = 0
     for (let i = 0; i < items.length; i++) {
-        const foundItem = drinkItems.find(function (a) {
+        const foundItem = data.find(function (a) {
             return a.Id == items[i].Id
         })
         total += items[i].Count * foundItem.Price
