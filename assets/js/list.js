@@ -11,10 +11,21 @@ async function getDrinkItems() {
     console.log(data)
     makeDrinkItemList()
 }
+// const foundIndex = cartItems.findIndex(function (a) {
+//     return a.Id == data[i].Id
+// })
 
 function makeDrinkItemList() {
     document.querySelector("#drinkList").innerHTML = ""
     for (let i = 0; i < data.DrinkItems.length; i++) {
+        let style 
+        if (data.DrinkItems[i].Id == data.MaxId) {
+            // console.log("maxId 찾았다", data.DrinkItems[i])
+            style = ""
+        }else{
+            style = "display:none"
+        }
+
         document.querySelector(
             "#drinkList"
         ).innerHTML += `<button class="drinks">
@@ -29,6 +40,7 @@ function makeDrinkItemList() {
                     id="bestIcon"
                     src="../assets/images/best-icon.jpg"
                     alt=""
+                    style="${style}"
                 />
         </button>`
     }
