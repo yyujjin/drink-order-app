@@ -43,7 +43,7 @@ func main() {
 	var totalCountList = make(map[int]int)
 	r.GET("/getDrinkItems", func(c *gin.Context) {
 		var maxValue int
-		var maxId int = 5 // TODO 이후에 동적으로 변경
+		var maxId int = 0
 		for id, count := range totalCountList {
 			if count > maxValue {
 				maxValue = count

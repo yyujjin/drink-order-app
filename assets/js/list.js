@@ -18,11 +18,13 @@ async function getDrinkItems() {
 function makeDrinkItemList() {
     document.querySelector("#drinkList").innerHTML = ""
     for (let i = 0; i < data.DrinkItems.length; i++) {
-        let style 
-        if (data.DrinkItems[i].Id == data.MaxId) {
-            // console.log("maxId 찾았다", data.DrinkItems[i])
+        // TODO 삼항연산자로 변경
+        let style
+        if (data.MaxId == 0 && i == 0) {
             style = ""
-        }else{
+        } else if (data.DrinkItems[i].Id == data.MaxId) {
+            style = ""
+        } else {
             style = "display:none"
         }
 
@@ -48,9 +50,9 @@ function makeDrinkItemList() {
 
 const drinks = document.querySelectorAll(".drinks")
 for (let i = 0; i < drinks.length; i++) {
-    drinks[i].addEventListener("click", function () {
-        putItemToCart(i)
-    })
+drinks[i].addEventListener("click", function () {
+putItemToCart(i)
+})
 }
 
 function putItemToCart(i) {
