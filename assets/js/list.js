@@ -19,14 +19,18 @@ function makeDrinkItemList() {
     document.querySelector("#drinkList").innerHTML = ""
     for (let i = 0; i < data.DrinkItems.length; i++) {
         // TODO 삼항연산자로 변경
-        let style
+        // let style
+        let style = data.DrinkItems[i].Id == data.MaxId ? "" : "display:none"
         if (data.MaxId == 0 && i == 0) {
             style = ""
-        } else if (data.DrinkItems[i].Id == data.MaxId) {
-            style = ""
-        } else {
-            style = "display:none"
-        }
+        } 
+        // else if (data.DrinkItems[i].Id == data.MaxId) {
+        //     style = ""
+        // } else {
+        //     style = "display:none"
+        // }
+
+       
 
         document.querySelector(
             "#drinkList"
