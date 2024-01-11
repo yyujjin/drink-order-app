@@ -1,7 +1,7 @@
 // const goToListButton = document.querySelector("#list-button")
 // goToListButton.addEventListener("click", function () {
 //     location.href = "http://localhost:8080/list"
-// }) 
+// })
 
 let data = []
 getDrinkItems()
@@ -12,10 +12,14 @@ async function getDrinkItems() {
     makeDrinkList()
 }
 let items = JSON.parse(localStorage.getItem("cartItems"))
-
+// console.log(items)
 function makeDrinkList() {
     const orderList = document.querySelector("#order-list")
     orderList.innerHTML = ""
+
+    if (items == null) {
+        return
+    }
     for (let i = 0; i < items.length; i++) {
         const foundItem = data.DrinkItems.find(function (a) {
             return a.Id == items[i].Id
@@ -46,10 +50,9 @@ document.addEventListener("click", function (e) {
         minusCount(e.target.dataset.index)
     } else if (e.target.id == "total-pay") {
         sendCartItems()
-    } else if ((e.target.id == "list-button")) {
+    } else if (e.target.closest("#list-button")) {
         location.href = "http://localhost:8080/list"
     }
- // 위에껄 이렇게 고쳤을 때 되긴 되는데 느리게됨 왜지?
 })
 
 async function deleteList(i) {
@@ -83,6 +86,10 @@ async function sendCartItems() {
         method: "POST",
         body: JSON.stringify(items),
     })
+    items = null
+    localStorage.clear("cartItems")
+    // localStorage.setItem("cartItems", JSON.stringify(items))
+    makeDrinkList()
 }
 
 function plusCount(selectedIndex) {
