@@ -63,7 +63,6 @@ func main() {
 			drinkItems, maxId,
 		}
 		fmt.Println(Response)
-		//{"drinkItems": [], "maxId": 5}
 		c.JSON(200, Response)
 	})
 
@@ -77,10 +76,11 @@ func main() {
 		}
 		fmt.Println(cartItems)
 		for index := range cartItems {
-
+			//이게 살짝 이해안가네
 			totalCountList[cartItems[index].Id] = totalCountList[cartItems[index].Id] + cartItems[index].Count
 		}
 		fmt.Println("토탈카운트", totalCountList)
+		
 	})
 
 	r.DELETE("/deleteItem/:id", func(c *gin.Context) {

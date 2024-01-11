@@ -17,7 +17,7 @@ function makeDrinkList() {
     const orderList = document.querySelector("#order-list")
     orderList.innerHTML = ""
     for (let i = 0; i < items.length; i++) {
-        const foundItem = data.find(function (a) {
+        const foundItem = data.DrinkItems.find(function (a) {
             return a.Id == items[i].Id
         })
         orderList.innerHTML += `<div class="lists">
@@ -63,22 +63,26 @@ async function deleteList(i) {
 function totalPrice() {
     let total = 0
     for (let i = 0; i < items.length; i++) {
-        const foundItem = data.find(function (a) {
+        const foundItem = data.DrinkItems.find(function (a) {
             return a.Id == items[i].Id
         })
         total += items[i].Count * foundItem.Price
     }
     document.querySelector("#totalPay").innerHTML = total
-    const image = document.querySelector("#myImage")
-    console.log(total)
 }
 
 async function sendCartItems() {
+    if (!confirm("주문하시겠습니까?")) {
+        return
+    }
     await fetch(`http://localhost:8080/sendCartItems`, {
         // TODO API명 변경
         method: "POST",
         body: JSON.stringify(items),
     })
+    
+   
+
 }
 
 function plusCount(selectedIndex) {
