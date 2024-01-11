@@ -11,26 +11,14 @@ async function getDrinkItems() {
     console.log(data)
     makeDrinkItemList()
 }
-// const foundIndex = cartItems.findIndex(function (a) {
-//     return a.Id == data[i].Id
-// })
 
 function makeDrinkItemList() {
     document.querySelector("#drinkList").innerHTML = ""
     for (let i = 0; i < data.DrinkItems.length; i++) {
-        // TODO 삼항연산자로 변경
-        // let style
         let style = data.DrinkItems[i].Id == data.MaxId ? "" : "display:none"
         if (data.MaxId == 0 && i == 0) {
             style = ""
-        } 
-        // else if (data.DrinkItems[i].Id == data.MaxId) {
-        //     style = ""
-        // } else {
-        //     style = "display:none"
-        // }
-
-       
+        }
 
         document.querySelector(
             "#drinkList"
@@ -50,13 +38,19 @@ function makeDrinkItemList() {
                 />
         </button>`
     }
+    const drinks = document.querySelectorAll(".drinks")
+    for (let i = 0; i < drinks.length; i++) {
+        drinks[i].addEventListener("click", function () {
+            putItemToCart(i)
+        })
+    }
 }
 
 const drinks = document.querySelectorAll(".drinks")
 for (let i = 0; i < drinks.length; i++) {
-drinks[i].addEventListener("click", function () {
-putItemToCart(i)
-})
+    drinks[i].addEventListener("click", function () {
+        putItemToCart(i)
+    })
 }
 
 function putItemToCart(i) {
@@ -64,17 +58,17 @@ function putItemToCart(i) {
         return
     }
 
-    const data = JSON.parse(localStorage.getItem("cartItems"))
-    const cartItems = data == undefined ? [] : data
+    const localStorageData = JSON.parse(localStorage.getItem("cartItems"))
+    const cartItems = localStorageData == undefined ? [] : localStorageData
 
     const foundIndex = cartItems.findIndex(function (a) {
-        return a.Id == data[i].Id
+        return a.Id == data.DrinkItems[i].Id
     })
 
     if (foundIndex == -1) {
         cartItems.push({
-            Id: data[i].Id,
-            Count: data[i].Count,
+            Id: data.DrinkItems[i].Id,
+            Count: data.DrinkItems[i].Count,
         })
     } else {
         cartItems[foundIndex].Count += 1
