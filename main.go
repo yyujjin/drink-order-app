@@ -36,7 +36,6 @@ func main() {
 	r.GET("/cart", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "cart.html", gin.H{})
 	})
-
 	r.GET("/getCartItems", func(c *gin.Context) {
 		c.JSON(200, cartItems)
 	})
@@ -80,7 +79,8 @@ func main() {
 			totalCountList[cartItems[index].Id] = totalCountList[cartItems[index].Id] + cartItems[index].Count
 		}
 		fmt.Println("토탈카운트", totalCountList)
-		
+		c.HTML(http.StatusOK, "orderFinish.html", gin.H{})
+		//이거 왜 안되냐.///////
 	})
 
 	r.DELETE("/deleteItem/:id", func(c *gin.Context) {

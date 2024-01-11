@@ -1,7 +1,7 @@
-const goToListButton = document.querySelector("#list-button")
-goToListButton.addEventListener("click", function () {
-    location.href = "http://localhost:8080/list"
-})
+// const goToListButton = document.querySelector("#list-button")
+// goToListButton.addEventListener("click", function () {
+//     location.href = "http://localhost:8080/list"
+// }) 
 
 let data = []
 getDrinkItems()
@@ -44,9 +44,12 @@ document.addEventListener("click", function (e) {
         plusCount(e.target.dataset.index)
     } else if (e.target.classList.contains("minusCounts")) {
         minusCount(e.target.dataset.index)
-    } else if ((e.target.id = "total-pay")) {
+    } else if (e.target.id == "total-pay") {
         sendCartItems()
+    } else if ((e.target.id == "list-button")) {
+        location.href = "http://localhost:8080/list"
     }
+ // 위에껄 이렇게 고쳤을 때 되긴 되는데 느리게됨 왜지?
 })
 
 async function deleteList(i) {
@@ -80,9 +83,6 @@ async function sendCartItems() {
         method: "POST",
         body: JSON.stringify(items),
     })
-    
-   
-
 }
 
 function plusCount(selectedIndex) {
