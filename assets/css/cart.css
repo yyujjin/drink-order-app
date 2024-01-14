@@ -46,7 +46,8 @@ body {
     border: solid rgb(18, 18, 18) 2px;
     float: right;
     margin: 10px;
-    margin-right: 18px;
+    margin-right: 10px;
+    margin-top: -30px;
 }
 #total-pay {
     font-family: "NanumBarunGothicYetHangul";
@@ -76,4 +77,30 @@ body {
 }
 #order-list{
     margin-top: 60px;
+}
+.options {
+    padding: 4px 2px;
+    margin: 0px;
+}
+.options input[type=radio]{
+    display: none;
+}
+.options input[type=radio]+label{
+    display: inline-block;
+    cursor: pointer;
+    height: 24px;
+    width: 90px;
+    border: 1px solid #333;
+    line-height: 24px;
+    text-align: center;
+    font-weight:bold;
+    font-size:13px;
+}
+.options input[type=radio]+label{
+    background-color: #fff;
+    color: #000000;
+}
+.options input[type=radio]:checked+label{
+    background-color:  rgb(255, 221, 0);
+    color: #000000;
 }

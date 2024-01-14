@@ -13,20 +13,21 @@ func main() {
 	r.Static("/assets", "./assets")
 
 	type drinkItem struct {
-		Id    int    `json:Id`
-		Name  string `json:"Name"`
-		Price int    `json:"Price"`
-		Src   string `json:"Src"`
-		Count int    `json:"Count"`
+		Id     int    `json:Id`
+		Name   string `json:"Name"`
+		Price  int    `json:"Price"`
+		Src    string `json:"Src"`
+		Count  int    `json:"Count"`
+		Option int    `json:"Option"` //option   0 => select  /  1=> hot/   2 = ice
 	}
 
 	var drinkItems = []drinkItem{
-		{1, "아메리카노", 4500, "../assets/images/Americano.png", 1},
-		{2, "카라멜 마끼아또", 6500, "../assets/images/CaramelMacchiato.png", 1},
-		{3, "민트초코 프라페", 6500, "../assets/images/MintChocolate Frappe.png", 1},
-		{4, "자몽 스무디", 5000, "../assets/images/Grapefruit Smoothie.png", 1},
-		{5, "카페 모카", 6000, "../assets/images/CafeMocha.png", 1},
-		{6, "레몬 에이드", 5000, "../assets/images/LemonAde.png", 1},
+		{1, "아메리카노", 4500, "../assets/images/Americano.png", 1, 0},
+		{2, "카라멜 마끼아또", 6500, "../assets/images/CaramelMacchiato.png", 1, 0},
+		{3, "민트초코 프라페", 6500, "../assets/images/MintChocolate Frappe.png", 1, 2},
+		{4, "자몽 스무디", 5000, "../assets/images/Grapefruit Smoothie.png", 1, 2},
+		{5, "카페 모카", 6000, "../assets/images/CafeMocha.png", 1, 0},
+		{6, "레몬 에이드", 5000, "../assets/images/LemonAde.png", 1, 2},
 	}
 	var cartItems = []drinkItem{}
 
@@ -65,22 +66,16 @@ func main() {
 		c.JSON(200, Response)
 	})
 
-	//겟드링크에서 js로 값을 2개 보내야해서 이걸 보내려면 구조체를 만들어야하나을 이용해야하고
-	//드링크 아이템이랑 maxid를 같이 내보내삼.
-
-	r.POST("/sendCartItems", func(c *gin.Context) {
+	r.POST("/orderDrinkItems", func(c *gin.Context) {
 		var cartItems []drinkItem
 		if err := c.BindJSON(&cartItems); err != nil {
 			return
 		}
-		fmt.Println(cartItems)
+		fmt.Println("카트아이템", cartItems)
 		for index := range cartItems {
-			//이게 살짝 이해안가네
 			totalCountList[cartItems[index].Id] = totalCountList[cartItems[index].Id] + cartItems[index].Count
 		}
 		fmt.Println("토탈카운트", totalCountList)
-		c.HTML(http.StatusOK, "orderFinish.html", gin.H{})
-		//이거 왜 안되냐.///////
 	})
 
 	r.DELETE("/deleteItem/:id", func(c *gin.Context) {

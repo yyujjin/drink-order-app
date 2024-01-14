@@ -12,7 +12,8 @@ async function getDrinkItems() {
     makeDrinkList()
 }
 let items = JSON.parse(localStorage.getItem("cartItems"))
-// console.log(items)
+console.log(items)
+
 function makeDrinkList() {
     const orderList = document.querySelector("#order-list")
     orderList.innerHTML = ""
@@ -24,6 +25,9 @@ function makeDrinkList() {
         const foundItem = data.DrinkItems.find(function (a) {
             return a.Id == items[i].Id
         })
+        console.log(foundItem.Option)
+        //option 선택할 수 있는 음료에만 radio 표시하기
+        const style = foundItem.Option == 0 ? "" : "display:none"
         orderList.innerHTML += `<div class="lists">
             <div class="drink-image" >
                 <img src="${foundItem.Src}" width="60" height="100" alt="">
@@ -32,9 +36,14 @@ function makeDrinkList() {
                 <li>품명 : ${foundItem.Name}</li>  
                 <li>가격 : ${foundItem.Price} 원</li>    
                 <li>수량 : <button class="minusCounts" data-index=${i} >-</button>${items[i].Count}개
-                <button class="plusCounts" data-index=${i}>+</button></li>      
+                <button class="plusCounts" data-index=${i}>+</button></li>
+                <div class="options">
+                    <input id="hot" type="radio" name="option" value="0" data-index=${i}>
+                    <label for="hot" style="${style}" >hot</label>
+                    <input id="ice" type="radio" name="option" value="1"data-index=${i}>
+                    <label for="ice" style="${style}" >ice</label>
+                </div>   
                 <button class="delete-buttons" data-index=${i}>x</button>
-                <p>BEST</p>
             </ul>
         </div>`
     }
@@ -49,9 +58,15 @@ document.addEventListener("click", function (e) {
     } else if (e.target.classList.contains("minusCounts")) {
         minusCount(e.target.dataset.index)
     } else if (e.target.id == "total-pay") {
-        sendCartItems()
+        orderDrinkItems()
     } else if (e.target.closest("#list-button")) {
         location.href = "http://localhost:8080/list"
+    }else if(e.target.id == "hot") {
+        items[e.target.dataset.index].Option = 1
+        console.log(items)
+    }else if(e.target.id == "ice") {
+        items[e.target.dataset.index].Option = 2
+        console.log(items)
     }
 })
 
@@ -77,11 +92,11 @@ function totalPrice() {
     document.querySelector("#totalPay").innerHTML = total
 }
 
-async function sendCartItems() {
+async function orderDrinkItems() {
     if (!confirm("주문하시겠습니까?")) {
         return
     }
-    await fetch(`http://localhost:8080/sendCartItems`, {
+    await fetch(`http://localhost:8080/orderDrinkItems`, {
         // TODO API명 변경
         method: "POST",
         body: JSON.stringify(items),
@@ -107,3 +122,4 @@ function minusCount(selectedIndex) {
     localStorage.setItem("cartItems", JSON.stringify(items))
     makeDrinkList()
 }
+
