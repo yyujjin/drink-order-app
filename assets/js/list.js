@@ -16,10 +16,10 @@ function makeDrinkItemList() {
     document.querySelector("#drinkList").innerHTML = ""
     for (let i = 0; i < data.DrinkItems.length; i++) {
         let style = data.DrinkItems[i].Id == data.MaxId ? "" : "display:none"
-        if (data.MaxId == 0 && i == 0) { // 주문된 상품이 하나도 없으면 아메리카노를 베스트로 표시       //사양은 주석을 적어주는게 좋음 
+        if (data.MaxId == 0 && i == 0) { // 주문된 상품이 하나도 없으면 아메리카노를 베스트로 표시       //사양은 주석을 적어주는게 좋음
             style = ""
         }
-
+        
         document.querySelector(
             "#drinkList"
         ).innerHTML += `<button class="drinks">
@@ -60,17 +60,19 @@ function putItemToCart(i) {
 
     const localStorageData = JSON.parse(localStorage.getItem("cartItems"))
     const cartItems = localStorageData == undefined ? [] : localStorageData
-
+    
     const foundIndex = cartItems.findIndex(function (a) {
         return a.Id == data.DrinkItems[i].Id
     })
-
-    if (foundIndex == -1) {
+    //품목은 같지만 옵션을 다르게 선택하고 싶을 경우에 장바구니에 새로 추가하게 함. 
+    //뭔가 엄청나게 잘못하고 있는것같음. 
+    //이걸 원래 list에서 정하고 들어와야되는것같은데 
+    if (foundIndex == -1||data.DrinkItems[i].Option!=cartItems[foundIndex].Option) {
         cartItems.push({
             Id: data.DrinkItems[i].Id,
             Count: data.DrinkItems[i].Count,
-            Option : data.DrinkItems[i].Option, // 여기서 안만들고 CART에서 선택하며 추가하도록 함 
-        })
+            Option : data.DrinkItems[i].Option, // 여기서 안만들고 CART에서 선택하며 추가하도록 함
+                    })
     } else {
         cartItems[foundIndex].Count += 1
     }

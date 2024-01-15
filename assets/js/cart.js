@@ -29,6 +29,10 @@ function makeDrinkList() {
         //id와 label for에 i를 넣어서 다른 id 생성했고
         //name명도 변경해줌
         const style = foundItem.Option == 0 ? "" : "display:none"
+        // 선택된 옵션이 날아가지 않게 고정시킴 
+        const checkedHot = items[i].Option == 1 ? "checked" : ""
+        const checkedIce = items[i].Option == 2 ? "checked" : ""
+       
         orderList.innerHTML += `<div class="lists">
             <div class="drink-image" >
                 <img src="${foundItem.Src}" width="60" height="100" alt="">
@@ -39,9 +43,9 @@ function makeDrinkList() {
                 <li>수량 : <button class="minusCounts" data-index=${i} >-</button>${items[i].Count}개
                 <button class="plusCounts" data-index=${i}>+</button></li>
                 <div class="options">
-                    <input id="hot${i}" type="radio" name="option${i}" value="0" data-index=${i}>
+                    <input id="hot${i}" type="radio" name="option${i}" value="1" data-index=${i} ${checkedHot} >
                     <label for="hot${i}" style="${style}" >Hot</label>
-                    <input id="ice${i}" type="radio" name="option${i}" value="1"data-index=${i}>
+                    <input id="ice${i}" type="radio" name="option${i}" value="2"data-index=${i} ${checkedIce}  >
                     <label for="ice${i}" style="${style}" >Ice</label>
                 </div>   
                 <button class="delete-buttons" data-index=${i}>x</button>
@@ -60,19 +64,19 @@ document.addEventListener("click", function (e) {
         minusCount(e.target.dataset.index)
     } else if (e.target.id == "total-pay") {
         orderDrinkItems()
-    } else if (e.target.closest("#list-button")) {  //closest 배움 
+    } else if (e.target.closest("#list-button")) {  //closest 배움
         location.href = "http://localhost:8080/list"
         //이벤트 리스너도 다르게 적용함
-        //TODO 로컬스토리지도 변경 하기 
-    } else if (e.target.id.startsWith("hot")) { 
+        //TODO 로컬스토리지도 변경 하기
+    } else if (e.target.id.startsWith("hot")) {
         items[e.target.dataset.index].Option = 1
         localStorage.setItem("cartItems", JSON.stringify(items))
     } else if (e.target.id.startsWith("ice")) {
         items[e.target.dataset.index].Option = 2
         localStorage.setItem("cartItems", JSON.stringify(items))
     }
+   
 })
-
 async function deleteList(i) {
     const confirmDelete = confirm("삭제하시겠습니까?")
     if (!confirmDelete) {
@@ -112,7 +116,7 @@ async function orderDrinkItems() {
         method: "POST",
         body: JSON.stringify(items),
     })
-    //주문하기 눌렀을 때 장바구니 비우기 
+    //주문하기 눌렀을 때 장바구니 비우기
     items = null
     localStorage.clear("cartItems")
     // localStorage.setItem("cartItems", JSON.stringify(items))
@@ -134,3 +138,23 @@ function minusCount(selectedIndex) {
     localStorage.setItem("cartItems", JSON.stringify(items))
     makeDrinkList()
 }
+
+
+
+
+
+
+
+
+
+
+
+
+// document.addEventListener("DOMContentLoaded", function () {
+//     for (let i = 0; i < items.length; i++) {
+//         const savedOption = JSON.parse(localStorage.getItem("cartItems"));
+//         if (savedOption !== null) {
+//             document.querySelector(`input[name="option${i}"][value="${savedOption[i].Option}"]`).checked = true;
+//         }
+//     }
+// });
