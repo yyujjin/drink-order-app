@@ -16,7 +16,7 @@ function makeDrinkItemList() {
     document.querySelector("#drinkList").innerHTML = ""
     for (let i = 0; i < data.DrinkItems.length; i++) {
         let style = data.DrinkItems[i].Id == data.MaxId ? "" : "display:none"
-        if (data.MaxId == 0 && i == 0) { // 주문된 상품이 하나도 없으면 아메리카노를 베스트로 표시
+        if (data.MaxId == 0 && i == 0) { // 주문된 상품이 하나도 없으면 아메리카노를 베스트로 표시       //사양은 주석을 적어주는게 좋음 
             style = ""
         }
 
@@ -69,7 +69,7 @@ function putItemToCart(i) {
         cartItems.push({
             Id: data.DrinkItems[i].Id,
             Count: data.DrinkItems[i].Count,
-            Option : data.DrinkItems[i].Option, // 일단 기본 값 설정해둠 
+            Option : data.DrinkItems[i].Option, // 여기서 안만들고 CART에서 선택하며 추가하도록 함 
         })
     } else {
         cartItems[foundIndex].Count += 1
