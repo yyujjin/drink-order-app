@@ -19,6 +19,7 @@ func main() {
 		Src    string `json:"Src"`
 		Count  int    `json:"Count"`
 		Option int    `json:"Option"` //option   0 => select  /  1=> hot/   2 = ice
+		//isIceOption bool `json:"isIceOption"`  ture = ice  false = hot or select
 	}
 
 	var drinkItems = []drinkItem{

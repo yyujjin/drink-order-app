@@ -1,4 +1,4 @@
-
+//isIceOption bool `json:"isIceOption"`  ture = ice  false = hot or select
 let data = []
 getDrinkItems()
 async function getDrinkItems() {
