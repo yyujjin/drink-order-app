@@ -13,22 +13,21 @@ func main() {
 	r.Static("/assets", "./assets")
 
 	type drinkItem struct {
-		Id     int    `json:Id`
-		Name   string `json:"Name"`
-		Price  int    `json:"Price"`
-		Src    string `json:"Src"`
-		Count  int    `json:"Count"`
-		Option int    `json:"Option"` //option   0 => select  /  1=> hot/   2 = ice
-		//isIceOption bool `json:"isIceOption"`  ture = ice  false = hot or select
+		Id          int    `json:Id`
+		Name        string `json:"Name"`
+		Price       int    `json:"Price"`
+		Src         string `json:"Src"`
+		Count       int    `json:"Count"`
+		IsIceOption bool   `json:"IsIceOption"` //ture = ice  false = select or hot
 	}
-
+	//Option int    `json:"Option"` //option   0 => select  /  1=> hot/   2 = ice
 	var drinkItems = []drinkItem{
-		{1, "아메리카노", 4500, "../assets/images/Americano.png", 1, 0},
-		{2, "카라멜 마끼아또", 6500, "../assets/images/CaramelMacchiato.png", 1, 0},
-		{3, "민트초코 프라페", 6500, "../assets/images/MintChocolate Frappe.png", 1, 2},
-		{4, "자몽 스무디", 5000, "../assets/images/Grapefruit Smoothie.png", 1, 2},
-		{5, "카페 모카", 6000, "../assets/images/CafeMocha.png", 1, 0},
-		{6, "레몬 에이드", 5000, "../assets/images/LemonAde.png", 1, 2},
+		{1, "아메리카노", 4500, "../assets/images/Americano.png", 1, false},
+		{2, "카라멜 마끼아또", 6500, "../assets/images/CaramelMacchiato.png", 1, false},
+		{3, "민트초코 프라페", 6500, "../assets/images/MintChocolate Frappe.png", 1, true},
+		{4, "자몽 스무디", 5000, "../assets/images/Grapefruit Smoothie.png", 1, true},
+		{5, "카페 모카", 6000, "../assets/images/CafeMocha.png", 1, false},
+		{6, "레몬 에이드", 5000, "../assets/images/LemonAde.png", 1, true},
 	}
 	var cartItems = []drinkItem{}
 
