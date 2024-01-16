@@ -37,6 +37,9 @@ func main() {
 	r.GET("/cart", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "cart.html", gin.H{})
 	})
+	r.GET("/option", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "option.html", gin.H{})
+	})
 	r.GET("/getCartItems", func(c *gin.Context) {
 		c.JSON(200, cartItems)
 	})

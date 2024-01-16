@@ -1,7 +1,3 @@
-// const goToListButton = document.querySelector("#list-button")
-// goToListButton.addEventListener("click", function () {
-//     location.href = "http://localhost:8080/list"
-// })
 
 let data = []
 getDrinkItems()
@@ -64,7 +60,7 @@ document.addEventListener("click", function (e) {
         minusCount(e.target.dataset.index)
     } else if (e.target.id == "total-pay") {
         orderDrinkItems()
-    } else if (e.target.closest("#list-button")) {  //closest 배움
+    } else if (e.target.closest("#list-button")) { 
         location.href = "http://localhost:8080/list"
         //이벤트 리스너도 다르게 적용함
         //TODO 로컬스토리지도 변경 하기
@@ -145,23 +141,3 @@ function minusCount(selectedIndex) {
     localStorage.setItem("cartItems", JSON.stringify(cartItems))
     makeDrinkList()
 }
-
-
-
-
-
-
-
-
-
-
-
-
-// document.addEventListener("DOMContentLoaded", function () {
-//     for (let i = 0; i < items.length; i++) {
-//         const savedOption = JSON.parse(localStorage.getItem("cartItems"));
-//         if (savedOption !== null) {
-//             document.querySelector(`input[name="option${i}"][value="${savedOption[i].Option}"]`).checked = true;
-//         }
-//     }
-// });

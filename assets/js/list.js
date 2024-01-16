@@ -16,13 +16,14 @@ function makeDrinkItemList() {
     document.querySelector("#drinkList").innerHTML = ""
     for (let i = 0; i < data.DrinkItems.length; i++) {
         let style = data.DrinkItems[i].Id == data.MaxId ? "" : "display:none"
-        if (data.MaxId == 0 && i == 0) { // 주문된 상품이 하나도 없으면 아메리카노를 베스트로 표시       //사양은 주석을 적어주는게 좋음
+        if (data.MaxId == 0 && i == 0) {
+            // 주문된 상품이 하나도 없으면 아메리카노를 베스트로 표시
             style = ""
         }
-        
+
         document.querySelector(
             "#drinkList"
-        ).innerHTML += `<button class="drinks">
+        ).innerHTML += `<button class="drinks"  >
             <img
             src="${data.DrinkItems[i].Src}"
             width="60"
@@ -54,35 +55,47 @@ for (let i = 0; i < drinks.length; i++) {
 }
 
 function putItemToCart(i) {
-    if (!confirm("장바구니에 추가하시겠습니까?")) {
-        return
-    }
+    openPopUp(i)
+    // if (!confirm("장바구니에 추가하시겠습니까?")) {
+    //     return
+    // }
 
-    const localStorageData = JSON.parse(localStorage.getItem("cartItems"))
-    const cartItems = localStorageData == undefined ? [] : localStorageData
-    
-    const foundIndex = cartItems.findIndex(function (a) {
-        return a.Id == data.DrinkItems[i].Id
-    })
-    //품목은 같지만 옵션을 다르게 선택하고 싶을 경우에 장바구니에 새로 추가하게 함. 
-    //뭔가 엄청나게 잘못하고 있는것같음. 
-    //이걸 원래 list에서 정하고 들어와야되는것같은데 
-    if (foundIndex == -1||data.DrinkItems[i].Option!=cartItems[foundIndex].Option) {
-        cartItems.push({
-            Id: data.DrinkItems[i].Id,
-            Count: data.DrinkItems[i].Count,
-            Option : data.DrinkItems[i].Option, // 여기서 안만들고 CART에서 선택하며 추가하도록 함
-                    })
-    } else {
-        cartItems[foundIndex].Count += 1
-    }
+    // const localStorageData = JSON.parse(localStorage.getItem("cartItems"))
+    // const cartItems = localStorageData == undefined ? [] : localStorageData
 
-    console.log(cartItems)
-    localStorage.setItem("cartItems", JSON.stringify(cartItems))
+    // const foundIndex = cartItems.findIndex(function (a) {
+    //     return a.Id == data.DrinkItems[i].Id
+    // })
+    // //품목은 같지만 옵션을 다르게 선택하고 싶을 경우에 장바구니에 새로 추가하게 함.
+    // //뭔가 엄청나게 잘못하고 있는것같음.
+    // //이걸 원래 list에서 정하고 들어와야되는것같은데
+    // if (
+    //     foundIndex == -1 ||
+    //     data.DrinkItems[i].Option != cartItems[foundIndex].Option
+    // ) {
+    //     cartItems.push({
+    //         Id: data.DrinkItems[i].Id,
+    //         Count: data.DrinkItems[i].Count,
+    //         Option: data.DrinkItems[i].Option, // 여기서 안만들고 CART에서 선택하며 추가하도록 함
+    //     })
+    // } else {
+    //     cartItems[foundIndex].Count += 1
+    // }
 
-    if (!confirm) {
-        ;("추가가 완료 되었습니다! 장바구니로 이동하시겠습니까?")
-        return
-    }
-    location.href = "http://localhost:8080/cart"
+    // console.log(cartItems)
+    // localStorage.setItem("cartItems", JSON.stringify(cartItems))
+
+    // if (!confirm) {
+    //     ;("추가가 완료 되었습니다! 장바구니로 이동하시겠습니까?")
+    //     return
+    // }
+    // location.href = "http://localhost:8080/cart"
+}
+//selectedIndex
+function openPopUp(i) {
+    window.open(
+        `http://localhost:8080/option?id=${i}`,
+        "optionpopup",
+        "width=450, height=250, top=150, left=200"
+    )
 }
