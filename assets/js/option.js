@@ -18,6 +18,9 @@ function getQuery() {
 function makeList() {
     const style =
         data.DrinkItems[selectedIndex].IsIceOption == true ? "display:none" : ""
+    const checked =
+        data.DrinkItems[selectedIndex].IsIceOption == true ? "checked" : ""
+
     document.querySelector(
         "#makeList"
     ).innerHTML = ` <img src="${data.DrinkItems[selectedIndex].Src}" alt="" width="100" height="130" >
@@ -27,8 +30,8 @@ function makeList() {
     <div class="options">
         <input id="hot" type="radio" name="option" >
         <label for="hot"  style="${style}">Hot</label>
-        <input id="ice" type="radio" name="option">
-        <label for="ice"  style="${style}">Ice</label>
+        <input id="ice" type="radio" name="option"  ${checked}>
+        <label for="ice" >Ice</label>
     </div>   
 </div>
 <button id="addButton" >장바구니에 담기</button>`
@@ -36,17 +39,18 @@ function makeList() {
 
 //장바구니에 추가하기 버튼을 누르면 실행되는 코드
 function putItemToCart() {
-    if (!confirm("장바구니에 추가하시겠습니까?")) {
-        return
-    }
     if (
-        data.DrinkItems[selectedIndex].IsIceOption == false&&
+        // data.DrinkItems[selectedIndex].IsIceOption == false&&
         document.querySelector("#hot").checked == false &&
         document.querySelector("#ice").checked == false
     ) {
         alert("옵션을 선택해 주세요")
         return
     }
+    if (!confirm("장바구니에 추가하시겠습니까?")) {
+        return
+    }
+
     const localStorageData = JSON.parse(localStorage.getItem("cartItems"))
     const cartItems = localStorageData == undefined ? [] : localStorageData
 
@@ -54,10 +58,9 @@ function putItemToCart() {
         return a.Id == data.DrinkItems[selectedIndex].Id
     })
     if (
-        foundIndex == -1
-        ||
+        foundIndex == -1 ||
         data.DrinkItems[selectedIndex].IsIceOption !=
-            cartItems[foundIndex].IsIceOption //첫번재 값만 찾아주니까 오류남 
+            cartItems[foundIndex].IsIceOption //첫번재 값만 찾아주니까 오류남
     ) {
         cartItems.push({
             Id: data.DrinkItems[selectedIndex].Id,
