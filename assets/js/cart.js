@@ -26,9 +26,7 @@ function makeDrinkList() {
         //name명도 변경해줌
         // const style = foundItem.Option == 0 ? "" : "display:none"
         // 선택된 옵션이 날아가지 않게 고정시킴
-        const checkedHot = cartItems[i].IsIceOption == false ? "checked" : ""
-        const checkedIce = cartItems[i].IsIceOption == true ? "checked" : ""
-
+        const selectedOption = cartItems[i].IsIceOption == "true" ? "Ice" : "Hot"
         orderList.innerHTML += `<div class="lists">
             <div class="drink-image" >
                 <img src="${foundItem.Src}" width="60" height="100" alt="">
@@ -38,12 +36,7 @@ function makeDrinkList() {
                 <li>가격 : ${foundItem.Price} 원</li>    
                 <li>수량 : <button class="minusCounts" data-index=${i} >-</button>${cartItems[i].Count}개
                 <button class="plusCounts" data-index=${i}>+</button></li>
-                <div class="options">
-                    <input id="hot${i}" type="radio" name="option${i}"  ${checkedHot} >
-                    <label for="hot${i}" >Hot</label>
-                    <input id="ice${i}" type="radio" name="option${i}" ${checkedIce}  >
-                    <label for="ice${i}" >Ice</label>
-                </div>   
+                <p>${selectedOption}</p>
                 <button class="delete-buttons" data-index=${i}>x</button>
             </ul>
         </div>`
