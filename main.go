@@ -1,34 +1,15 @@
 package main
 
 import (
-	"fmt"
+	"drink-order-app/src/controllers"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	
 )
 
 func main() {
 	r := gin.Default()
 	r.LoadHTMLGlob("templates/*")
 	r.Static("/assets", "./assets")
-
-	type drinkItem struct {
-		Id          int    `json:Id`
-		Name        string `json:"Name"`
-		Price       int    `json:"Price"`
-		Src         string `json:"Src"`
-		Count       int    `json:"Count"`
-		IsIceOption bool   `json:"IsIceOption"` //ture = ice  false = select or hot
-	}
-
-	var drinkItems = []drinkItem{
-		{1, "아메리카노", 4500, "../assets/images/Americano.png", 1, false},
-		{2, "카라멜 마끼아또", 6500, "../assets/images/CaramelMacchiato.png", 1, false},
-		{3, "민트초코 프라페", 6500, "../assets/images/MintChocolate Frappe.png", 1, true},
-		{4, "자몽 스무디", 5000, "../assets/images/Grapefruit Smoothie.png", 1, true},
-		{5, "카페 모카", 6000, "../assets/images/CafeMocha.png", 1, false},
-		{6, "레몬 에이드", 5000, "../assets/images/LemonAde.png", 1, true},
-	}
 
 	r.GET("/list", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "list.html", gin.H{})
@@ -39,62 +20,11 @@ func main() {
 	r.GET("/option", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "option.html", gin.H{})
 	})
-	// r.GET("/getCartItems", func(c *gin.Context) {
-	// 	c.JSON(200, cartItems)
-	// })
-	var totalCountList = make(map[int]int)
-	r.GET("/getDrinkItems", func(c *gin.Context) {
-		var maxValue int
-		var maxId int
-		for id, count := range totalCountList {
-			if count > maxValue {
-				maxValue = count
-				maxId = id
-			}
-		}
 
-		fmt.Println(maxId)
-		fmt.Println("토탈", totalCountList)
+	// controllers/drink.go
+	r.GET("/getDrinkItems", controllers.GetDrinkItems)
 
-		type response struct {
-			DrinkItems []drinkItem
-			MaxId      int
-		}
-
-		Response := response{
-			drinkItems, maxId,
-		}
-		fmt.Println(Response)
-		c.JSON(200, Response)
-	})
-
-	r.POST("/orderDrinkItems", func(c *gin.Context) {
-		var cartItems []drinkItem
-		if err := c.BindJSON(&cartItems); err != nil {
-			fmt.Println(err)
-			return
-		}
-		fmt.Println("카트아이템", cartItems) // 아이디랑, 카운트랑, 옵션만 담기는 구조체를 따로 만들어서 
-		for index := range cartItems {
-			totalCountList[cartItems[index].Id] = totalCountList[cartItems[index].Id] + cartItems[index].Count
-		}
-		fmt.Println("토탈카운트", totalCountList)
-	})
-
-	// r.DELETE("/deleteItem/:id", func(c *gin.Context) {
-	// 	id, err := strconv.Atoi(c.Param("id"))
-	// 	if err != nil {
-	// 		c.IndentedJSON(http.StatusNotFound, gin.H{"message": "올바르지 않은 접근입니다."})
-	// 		return
-	// 	}
-	// 	for index := range cartItems {
-	// 		if index == id {
-	// 			cartItems = append(cartItems[:index], cartItems[index+1:]...)
-	// 			return
-	// 		}
-	// 	}
-	// 	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "album not found"})
-	// })
+	r.POST("/orderDrinkItems", controllers.OrderDrinkItems)
 
 	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 
