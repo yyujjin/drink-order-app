@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"strconv"
+	
 )
 
 func main() {
@@ -20,7 +20,7 @@ func main() {
 		Count       int    `json:"Count"`
 		IsIceOption bool   `json:"IsIceOption"` //ture = ice  false = select or hot
 	}
-	//Option int    `json:"Option"` //option   0 => select  /  1=> hot/   2 = ice
+
 	var drinkItems = []drinkItem{
 		{1, "아메리카노", 4500, "../assets/images/Americano.png", 1, false},
 		{2, "카라멜 마끼아또", 6500, "../assets/images/CaramelMacchiato.png", 1, false},
@@ -29,7 +29,6 @@ func main() {
 		{5, "카페 모카", 6000, "../assets/images/CafeMocha.png", 1, false},
 		{6, "레몬 에이드", 5000, "../assets/images/LemonAde.png", 1, true},
 	}
-	var cartItems = []drinkItem{}
 
 	r.GET("/list", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "list.html", gin.H{})
@@ -40,9 +39,9 @@ func main() {
 	r.GET("/option", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "option.html", gin.H{})
 	})
-	r.GET("/getCartItems", func(c *gin.Context) {
-		c.JSON(200, cartItems)
-	})
+	// r.GET("/getCartItems", func(c *gin.Context) {
+	// 	c.JSON(200, cartItems)
+	// })
 	var totalCountList = make(map[int]int)
 	r.GET("/getDrinkItems", func(c *gin.Context) {
 		var maxValue int
@@ -82,20 +81,20 @@ func main() {
 		fmt.Println("토탈카운트", totalCountList)
 	})
 
-	r.DELETE("/deleteItem/:id", func(c *gin.Context) {
-		id, err := strconv.Atoi(c.Param("id"))
-		if err != nil {
-			c.IndentedJSON(http.StatusNotFound, gin.H{"message": "올바르지 않은 접근입니다."})
-			return
-		}
-		for index := range cartItems {
-			if index == id {
-				cartItems = append(cartItems[:index], cartItems[index+1:]...)
-				return
-			}
-		}
-		c.IndentedJSON(http.StatusNotFound, gin.H{"message": "album not found"})
-	})
+	// r.DELETE("/deleteItem/:id", func(c *gin.Context) {
+	// 	id, err := strconv.Atoi(c.Param("id"))
+	// 	if err != nil {
+	// 		c.IndentedJSON(http.StatusNotFound, gin.H{"message": "올바르지 않은 접근입니다."})
+	// 		return
+	// 	}
+	// 	for index := range cartItems {
+	// 		if index == id {
+	// 			cartItems = append(cartItems[:index], cartItems[index+1:]...)
+	// 			return
+	// 		}
+	// 	}
+	// 	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "album not found"})
+	// })
 
 	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 

@@ -36,17 +36,18 @@ function makeList() {
         <button id="addButton" type = "button">장바구니에 담기</button>
     `
 }
+
 //장바구니에 추가하기 버튼을 누르면 실행되는 코드
 function putItemToCart() {
     // 미션: 문자열 트루를 불리언 으로 타입 바꾸기
-    let optionByCustomer = document.querySelector("form").option.value == "true" ? true : false //주문하기를 눌렀을 때의 값을 가져와야해서 함수안에 넣어줌
+    let optionByCustomer = selectedItem.IsIceOption = document.querySelector("form").option.value
+    selectedItem.IsIceOption = optionByCustomer == "true" ? true : false //주문하기를 눌렀을 때의 값을 가져와야해서 함수안에 넣어줌
 
-    console.log(optionByCustomer)
-    if (optionByCustomer == ""){
+    if (optionByCustomer == "") {
         alert("옵션을 선택해 주세요")
         return
     }
-      
+
     if (!confirm("장바구니에 추가하시겠습니까?")) {
         return
     }
@@ -54,20 +55,22 @@ function putItemToCart() {
     const localStorageData = JSON.parse(localStorage.getItem("cartItems"))
     const cartItems = localStorageData == undefined ? [] : localStorageData
 
-    // 유저가 선택한 옵션이 카트아이템에 있는지 
+    // 유저가 선택한 옵션이 카트아이템에 있는지
     // 있다면 카운트만 증가 / 없으면 요소를 추가
     // selectedItem.IsIceOption = 트루 => 얘는 사장님이 아이스만 판매하겠다. 유저 선택한게 아님
     // selectedItem.IsIceOption = 폴스 => 아이스 혹은 핫 선택 가능 // 여기까진 내가 설정한거고
-    //내가 가져와야하는값은 유저가 폴스에서 선택한값을 가져와야 함 => 그래서 value 속성이 필요함 
+    //내가 가져와야하는값은 유저가 폴스에서 선택한값을 가져와야 함 => 그래서 value 속성이 필요함
     const foundIndex = cartItems.findIndex(function (a) {
-        return a.Id == selectedItem.Id && a.IsIceOption == optionByCustomer
+        return (
+            a.Id == selectedItem.Id && a.IsIceOption == selectedItem.IsIceOption
+        )
     })
-    
-    if (foundIndex == -1 ) {
+
+    if (foundIndex == -1) {
         cartItems.push({
             Id: selectedItem.Id,
             Count: selectedItem.Count,
-            IsIceOption: optionByCustomer, // 여기서 안만들고 CART에서 선택하며 추가하도록 함
+            IsIceOption: selectedItem.IsIceOption, // 여기서 안만들고 CART에서 선택하며 추가하도록 함
         })
     } else {
         cartItems[foundIndex].Count += 1
@@ -86,13 +89,14 @@ function putItemToCart() {
 document.addEventListener("click", function (e) {
     if (e.target.id == "addButton") {
         putItemToCart(selectedIndex)
-    } else if (e.target.id == "hot") {
-        selectedItem.IsIceOption = false //그냥 값을 바꿔버려 왜냐면 어파치 창은 일회용이니까.
-        console.log(data.DrinkItems)
-    } else if (e.target.id == "ice") {
-        selectedItem.IsIceOption = true
-        console.log(data.DrinkItems)
     }
+    // else if (e.target.id == "hot") {
+    //     selectedItem.IsIceOption = false //그냥 값을 바꿔버려 왜냐면 어파치 창은 일회용이니까.
+    //     console.log(data.DrinkItems)
+    // } else if (e.target.id == "ice") {
+    //     selectedItem.IsIceOption = true
+    //     console.log(data.DrinkItems)
+    // }
 })
 
 function openCartPagePopUp() {

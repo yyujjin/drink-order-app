@@ -26,7 +26,7 @@ function makeDrinkList() {
         //name명도 변경해줌
         // const style = foundItem.Option == 0 ? "" : "display:none"
         // 선택된 옵션이 날아가지 않게 고정시킴
-        const selectedOption = cartItems[i].IsIceOption == "true" ? "Ice" : "Hot"
+        const selectedOption = cartItems[i].IsIceOption == true ? "Ice" : "Hot"
         orderList.innerHTML += `<div class="lists">
             <div class="drink-image" >
                 <img src="${foundItem.Src}" width="60" height="100" alt="">
@@ -89,14 +89,12 @@ async function orderDrinkItems() {
     }
 
     await fetch(`http://localhost:8080/orderDrinkItems`, {
-        // TODO API명 변경
+       
         method: "POST",
         body: JSON.stringify(cartItems),
     })
-    //주문하기 눌렀을 때 장바구니 비우기
     cartItems = null
     localStorage.clear("cartItems")
-    // localStorage.setItem("cartItems", JSON.stringify(items))
     makeDrinkList()
     totalPrice()
 }
