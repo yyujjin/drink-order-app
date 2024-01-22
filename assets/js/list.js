@@ -57,6 +57,6 @@ function openPopUp(selectedIndex) {
     window.open(
         `http://localhost:8080/option?id=${selectedIndex}`,
         "optionpopup",
-        "width=450, height=250, top=150, left=200"
+        "width=700, height=300, top=350, left=200"
     )
 }
