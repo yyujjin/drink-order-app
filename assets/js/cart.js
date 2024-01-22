@@ -1,9 +1,8 @@
-//isIceOption bool `json:"isIceOption"`  ture = ice  false = hot or select
 let data = []
 getDrinkItems()
 async function getDrinkItems() {
     const res = await fetch("http://localhost:8080/getDrinkItems")
-    data = await res.json() //JSON.parse 역할 함. 객체로 변환돼서 담김.
+    data = await res.json()
     console.log(data)
     makeDrinkList()
 }
@@ -21,11 +20,6 @@ function makeDrinkList() {
         const foundItem = data.DrinkItems.find(function (a) {
             return a.Id == cartItems[i].Id
         })
-        //option 선택할 수 있는 음료에만 radio 표시하기
-        //id와 label for에 i를 넣어서 다른 id 생성했고
-        //name명도 변경해줌
-        // const style = foundItem.Option == 0 ? "" : "display:none"
-        // 선택된 옵션이 날아가지 않게 고정시킴
         const selectedOption = cartItems[i].IsIceOption == true ? "Ice" : "Hot"
         orderList.innerHTML += `<div class="lists">
             <div class="drink-image" >
@@ -89,7 +83,6 @@ async function orderDrinkItems() {
     }
 
     await fetch(`http://localhost:8080/orderDrinkItems`, {
-       
         method: "POST",
         body: JSON.stringify(cartItems),
     })

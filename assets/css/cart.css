@@ -1,7 +1,7 @@
 body {
-    background-image: url(../images/cart-background-image.jpg);
+    background-image: url(../images/background-top-bar.jpg);
     background-repeat: no-repeat;
-    background-size: 405px;
+    background-size: 440px;
     background-position-x: center;
     font-family: "NanumBarunGothicYetHangul";
     width: 100vw;
@@ -15,7 +15,7 @@ body {
     width: 60px;
     height: 54px;
     float: right;
-    margin-top: -60px;
+    margin-top: -58px;
 }
 
 .lists {
@@ -47,7 +47,7 @@ body {
     float: right;
     margin: 10px;
     margin-right: 10px;
-    margin-top: -30px;
+    margin-top: -50px;
 }
 #total-pay {
     font-family: "NanumBarunGothicYetHangul";
@@ -63,7 +63,7 @@ body {
     border: 1px solid black;
     border: none;
     width: 350px;
-    height: 53px;
+    height: 74px;
 }
 
 .countButtons {

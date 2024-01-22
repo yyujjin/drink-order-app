@@ -1,8 +1,9 @@
 body {
-    background-image: url(../images/background-image.jpg);
+    background-image: url(../images/background-top-bar.jpg);
     background-repeat: no-repeat;
-    background-size: 405px;
+    background-size: 450px;
     background-position-x: center;
+    margin-top: 120px;
 }
 button {
     border: none;
@@ -32,7 +33,6 @@ button {
     cursor: pointer;
     width: 40px;
     height: 43px;
-    /* border: solid black 1px; */
     float: right;
     margin-top: -30px;
     position: absolute;

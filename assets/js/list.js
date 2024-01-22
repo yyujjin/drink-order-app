@@ -17,7 +17,6 @@ function makeDrinkItemList() {
     for (let i = 0; i < data.DrinkItems.length; i++) {
         let style = data.DrinkItems[i].Id == data.MaxId ? "" : "display:none"
         if (data.MaxId == 0 && i == 0) {
-            // 주문된 상품이 하나도 없으면 아메리카노를 베스트로 표시
             style = ""
         }
 
@@ -61,5 +60,3 @@ function openPopUp(selectedIndex) {
         "width=450, height=250, top=150, left=200"
     )
 }
-
-

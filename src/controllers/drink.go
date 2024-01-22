@@ -56,7 +56,7 @@ func OrderDrinkItems(c *gin.Context) {
 		fmt.Println(err)
 		return
 	}
-	fmt.Println("카트아이템", cartItems) // 아이디랑, 카운트랑, 옵션만 담기는 구조체를 따로 만들어서
+	fmt.Println("카트아이템", cartItems) 
 	for index := range cartItems {
 		totalCountList[cartItems[index].Id] = totalCountList[cartItems[index].Id] + cartItems[index].Count
 	}
